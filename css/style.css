@@ -54,3 +54,18 @@ h1 {
     height: 300px; /* Hauteur en pixels */
     border-radius: 50%; /* Optionnel : arrondir les coins */
 }
+
+.photographer-location {
+   color: #901C1C;
+   margin-top:-20px;
+}
+
+.photographer-price {
+    color: hsla(0, 9%, 39%, 0.452);
+    margin-top:-10px;
+}
+
+.photographer-tagline{
+    margin-top:-10px;
+}
+  
