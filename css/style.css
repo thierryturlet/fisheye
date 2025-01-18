@@ -88,14 +88,12 @@ h1 {
 
 /* Style pour la section photographe */
 .photograph-header{
+    
     display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-content: space-between;
-    
-    gap:20px;
-    
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+      
     
 
 }
@@ -130,20 +128,25 @@ h1 {
 #tagline-container {
     font-size: 16px;
     color: #6B6B6B;
-    font-style: italic;
+    font-style:normal;
     margin-left: 20px;
 }
 
 /* Bouton pour contacter */
+
 button.contact-button {
-    background-color: #D3573C;
-    color: #FFFFFF;
-    padding: 10px 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    padding: 11px;
+    width: 170px;
+    height: 70px;
     border: none;
+    background-color: #901C1C;
     border-radius: 5px;
-    font-size: 16px;
     cursor: pointer;
-    text-align: center;
+    margin: 0 5vw;
+
     
 }
 

@@ -26,4 +26,21 @@ async function getPhotographers() {
     })
     return photographerToFind
   }
+  
+  
+  async function  getMediaPhotographer(id){
+    const response = await fetch("http://127.0.0.1:5500/data/photographers.json");
+  
+    const data = await response.json();
+
+    let mediaList = data.media;
+    console.log(id)
+    console.log(mediaList)
     
+
+    let mediaToFind = mediaList.filter((media) => media.photographerId == id);
+    console.log(mediaToFind)
+
+    
+    return mediaToFind
+}
