@@ -10,6 +10,7 @@ async function main() {
   
   
   displayPhotographerInfo(photographer)
+  displayMedia(media)
 
 }
 
@@ -47,6 +48,45 @@ function displayPhotographerInfo(photographer) {
 
 }
 
+function displayMedia(media) {
 
+  // Boucler sur chaque media
+  media.forEach((mediaItem) => {
+  const mediaContainer = document.getElementById("media-container");
+  console.log(mediaContainer)
+  
+  // Créer un élément pour chaque media
+  const mediaElement = document.createElement("article");
+  console.log(mediaElement)
 
+  // Ajouter une image
+  const imageElement = document.createElement("img");
+  
+  const photographerFolder = getPhotographerFolder(mediaItem.photographerId);
+  imageElement.src = `./photos/Sample photos/${photographerFolder}/${mediaItem.image}`;
+  
+
+  
+  // Ajouter nom des images
+  const nomImage = document.createElement("p");
+  nomImage.textContent = mediaItem.image;
+  mediaContainer.appendChild(nomImage);
+  console.log(nomImage)
+
+  
+
+  // Ajouter l'image à l'élément media
+  mediaElement.appendChild(imageElement);
+  mediaElement.appendChild(nomImage);
+
+  // Ajouter l'élément média au conteneur principal
+  mediaContainer.appendChild(mediaElement)
+  }
+)
+}
+
+function getPhotographerFolder(photographerId) {
+  // Retourner le nom du dossier photographe
+  return photographerId
+}
 main();
