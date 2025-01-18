@@ -63,7 +63,7 @@ function displayMedia(media) {
   const imageElement = document.createElement("img");
   
   const photographerFolder = getPhotographerFolder(mediaItem.photographerId);
-  imageElement.src = `./photos/Sample photos/${photographerFolder}/${mediaItem.image}`;
+  imageElement.src = `./photos/imagesetvideos/${mediaItem.image}`;
   
 
   
