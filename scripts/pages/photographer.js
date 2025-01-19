@@ -58,18 +58,19 @@ function displayMedia(media) {
   // Créer un élément pour chaque media
   const mediaElement = document.createElement("article");
   console.log(mediaElement)
+  
 
   // Ajouter une image
   const imageElement = document.createElement("img");
-  
   const photographerFolder = getPhotographerFolder(mediaItem.photographerId);
-  imageElement.src = `./photos/imagesetvideos/${mediaItem.image}`;
   
-
+  imageElement.src =`./photos/imagesetvideos/${photographerFolder}/${mediaItem.image}`;
+  mediaElement.appendChild(imageElement)
+  console.log(imageElement)
   
   // Ajouter nom des images
   const nomImage = document.createElement("p");
-  nomImage.textContent = mediaItem.image;
+  nomImage.textContent = mediaItem.title;
   mediaContainer.appendChild(nomImage);
   console.log(nomImage)
 
@@ -84,9 +85,9 @@ function displayMedia(media) {
   }
 )
 }
-
 function getPhotographerFolder(photographerId) {
   // Retourner le nom du dossier photographe
-  return photographerId
+  return photographerId;
 }
+
 main();
