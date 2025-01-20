@@ -57,11 +57,11 @@ function displayMedia(media) {
     const mediaElement = document.createElement("article");
     console.log(mediaElement);
 
-    let imageElement;
+   
 
     if (mediaItem.image) {
       // Ajouter une image
-      imageElement = document.createElement("img"); // Initialiser imageElement ici
+      const imageElement = document.createElement("img"); 
       const photographerFolder = getPhotographerFolder(
         mediaItem.photographerId
       );
@@ -81,8 +81,8 @@ function displayMedia(media) {
     else if (mediaItem.video) {
 
       // Ajouter une video
-      let videoElement;
-      videoElement = document.createElement("video");
+
+      const videoElement = document.createElement("video");
       const photographerFolder = getPhotographerFolder(
         mediaItem.photographerId
       );
