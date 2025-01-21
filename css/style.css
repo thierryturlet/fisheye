@@ -157,7 +157,25 @@ button.contact-button:hover {
 
 /*css pour les images des photographes*/
 
+#media-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px 100px;
+    gap: 20px;
+    justify-content: space-between;
+}
 
+#media-container img, .media-container video {
+    width: 500px;
+    height: 500px;
+    object-fit: cover;
+}
+
+.container-likes{
+    display:flex;
+    justify-content: space-between;
+
+}
     
    
    

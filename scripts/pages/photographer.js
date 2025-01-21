@@ -57,60 +57,65 @@ function displayMedia(media) {
     const mediaElement = document.createElement("article");
     console.log(mediaElement);
 
-   
-
     if (mediaItem.image) {
       // Ajouter une image
-      const imageElement = document.createElement("img"); 
-      const photographerFolder = getPhotographerFolder(
-        mediaItem.photographerId
-      );
+      const imageElement = document.createElement("img");
+      const photographerFolder = mediaItem.photographerId;
 
-      imageElement.src = `./photos/imagesetvideos/${photographerFolder}/${mediaItem.image}`;
+      imageElement.src = "./photos/imagesetvideos/" + photographerFolder + "/" + mediaItem.image;
       mediaElement.appendChild(imageElement);
       console.log(imageElement);
-    
 
-    // Ajouter nom des images
-    const nomImage = document.createElement("p");
-    nomImage.textContent = mediaItem.title;
-    mediaElement.appendChild(nomImage); // Ajouter le nom à l'intérieur de mediaElement
-    console.log(nomImage);
-    }
+      // Créer une div pour le titre et les likes
+      const divLikeContainer = document.createElement("div");
+      divLikeContainer.classList.add("container-likes")
+      // Ajouter un paragraphe pour le titre
+      const titleParagraph = document.createElement("p");
+      titleParagraph.textContent = mediaItem.title;
+      divLikeContainer.appendChild(titleParagraph); // Ajouter le titre à la div
 
-    else if (mediaItem.video) {
+      // Ajouter un paragraphe pour les likes
+      const likesParagraph = document.createElement("p");
+      likesParagraph.textContent = mediaItem.likes;
+      divLikeContainer.appendChild(likesParagraph); // Ajouter les likes à la div
 
-      // Ajouter une video
+      // Ajouter la div au mediaElement
+      mediaElement.appendChild(divLikeContainer);
+      console.log(divLikeContainer);
 
+    } else if (mediaItem.video) {
+      // Ajouter une vidéo
       const videoElement = document.createElement("video");
-      const photographerFolder = getPhotographerFolder(
-        mediaItem.photographerId
-      );
+      const photographerFolder = mediaItem.photographerId;
 
-      videoElement.src = `./photos/imagesetvideos/${photographerFolder}/${mediaItem.video}`;
+      videoElement.src = "./photos/imagesetvideos/" + photographerFolder + "/" + mediaItem.video;
+      videoElement.controls = true; // Ajout des contrôles pour la vidéo
       mediaElement.appendChild(videoElement);
       console.log(videoElement);
 
-      // Ajouter nom des video
-    const nomVideo = document.createElement("p");
-    nomVideo.textContent = mediaItem.title;
-    mediaElement.appendChild(nomVideo); // Ajouter le nom à l'intérieur de mediaElement
-    console.log(nomVideo);
-    
+      // Créer une div pour le titre et les likes
+      const divLikeContainer = document.createElement("div");
+      divLikeContainer.classList.add("container-likes")
+
+      // Ajouter un paragraphe pour le titre
+      const titleParagraph = document.createElement("p");
+      titleParagraph.textContent = mediaItem.title;
+      divLikeContainer.appendChild(titleParagraph); // Ajouter le titre à la div
+
+      // Ajouter un paragraphe pour les likes
+      const likesParagraph = document.createElement("p");
+      likesParagraph.textContent = mediaItem.likes;
+      divLikeContainer.appendChild(likesParagraph); // Ajouter les likes à la div
+
+      // Ajouter la div au mediaElement
+      mediaElement.appendChild(divLikeContainer);
+      console.log(divLikeContainer);
     }
 
     // Ajouter l'élément média au conteneur principal
     mediaContainer.appendChild(mediaElement);
-
-
   });
 }
 
-
-
-function getPhotographerFolder(photographerId) {
-  // Retourner le nom du dossier photographe
-  return photographerId;
-}
 
 main();
