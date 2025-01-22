@@ -165,7 +165,7 @@ button.contact-button:hover {
     justify-content: space-between;
 }
 
-#media-container img, .media-container video {
+#media-container img, #media-container video {
     width: 500px;
     height: 500px;
     object-fit: cover;
