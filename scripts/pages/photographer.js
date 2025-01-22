@@ -69,6 +69,7 @@ function displayMedia(media) {
       // Créer une div pour le titre et les likes
       const divLikeContainer = document.createElement("div");
       divLikeContainer.classList.add("container-likes")
+      
       // Ajouter un paragraphe pour le titre
       const titleParagraph = document.createElement("p");
       titleParagraph.textContent = mediaItem.title;

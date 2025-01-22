@@ -176,6 +176,11 @@ button.contact-button:hover {
     justify-content: space-between;
 
 }
+.container-likes p{
+    color:#901C1C;
+    font-size:20px;
+    font-weight:bold;
+}
     
    
    
