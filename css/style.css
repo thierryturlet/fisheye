@@ -175,13 +175,35 @@ button.contact-button:hover {
 .container-likes{
     display:flex;
     justify-content: space-between;
+    align-items: baseline;
+    position: relative;
+
+    
 
 }
 .container-likes p{
     color:#901C1C;
     font-size:20px;
     font-weight:bold;
+   
+  
 }
+
+.container-likes p:nth-of-type(2) {
+   
+    position:relative;
+    left: 95px; /* Ajustez cette valeur selon vos besoins */
+}
+
+
+
+/* CSS pour le coeur */
+.fa-solid.fa-heart.heart-icon {
+    color: #901C1C;
+    font-size: 20px;
+    font-weight: bold;   
+}
+
     
    
    

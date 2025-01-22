@@ -80,6 +80,12 @@ function displayMedia(media) {
       likesParagraph.textContent = mediaItem.likes;
       divLikeContainer.appendChild(likesParagraph); // Ajouter les likes à la div
 
+      //Ajout des coeurs
+
+      const heartLikes = document.createElement("i");
+      heartLikes.classList.add ("fa-solid","fa-heart","heart-icon")
+      divLikeContainer.appendChild(heartLikes)
+
       // Ajouter la div au mediaElement
       mediaElement.appendChild(divLikeContainer);
       console.log(divLikeContainer);
@@ -107,6 +113,12 @@ function displayMedia(media) {
       const likesParagraph = document.createElement("p");
       likesParagraph.textContent = mediaItem.likes;
       divLikeContainer.appendChild(likesParagraph); // Ajouter les likes à la div
+
+       //Ajout des coeurs
+
+       const heartLikes = document.createElement("i");
+       heartLikes.classList.add ("fa-solid","fa-heart","heart-icon")
+       divLikeContainer.appendChild(heartLikes)
 
       // Ajouter la div au mediaElement
       mediaElement.appendChild(divLikeContainer);
