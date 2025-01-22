@@ -169,6 +169,7 @@ button.contact-button:hover {
     width: 500px;
     height: 500px;
     object-fit: cover;
+    border-radius: 5px;
 }
 
 .container-likes{
