@@ -175,8 +175,8 @@ button.contact-button:hover {
 .container-likes{
     display:flex;
     justify-content: space-between;
-    align-items: baseline;
-    position: relative;
+    align-items: center;
+    
 
     
 
@@ -189,22 +189,23 @@ button.contact-button:hover {
   
 }
 
-.container-likes p:nth-of-type(2) {
-   
-    position:relative;
-    left: 95px; /* Ajustez cette valeur selon vos besoins */
-}
-
 
 
 /* CSS pour le coeur */
+
 .fa-solid.fa-heart.heart-icon {
     color: #901C1C;
     font-size: 20px;
     font-weight: bold;   
 }
 
-    
+/*css pour coeur etlikes*/
+
+.stylediv{
+    display: flex;
+    align-items: baseline;
+    gap:5px;
+}
    
    
 
