@@ -9,6 +9,9 @@ async function main() {
 
   displayPhotographerInfo(photographer);
   displayMedia(media);
+  
+  getLikesPhotographer();
+
 }
 
 function displayPhotographerInfo(photographer) {
@@ -87,11 +90,19 @@ function displayMedia(media) {
       heartLikes.classList.add("fa-solid", "fa-heart", "heart-icon");
       divLikeContainer.appendChild(heartLikes);
 
-      // Ajouter un gestionnaire d'événements pour augmenter les likes
-      heartLikes.addEventListener("click", () => {
-        // Augmenter le nombre de likes
-        mediaItem.likes++;
-        // Mettre à jour le texte du paragraphe des likes
+       // Ajouter un gestionnaire d'événements pour augmenter les likes
+
+       mediaItem.isLiked = false;
+
+       heartLikes.addEventListener("click", () => {
+        if (mediaItem.isLiked === false) {
+          mediaItem.likes++;
+          mediaItem.isLiked = true;
+        } else if (mediaItem.isLiked === true){
+          mediaItem.likes--;
+          mediaItem.isLiked = false;
+        }
+        
         likesParagraph.textContent = mediaItem.likes;
       });
 
@@ -139,14 +150,22 @@ function displayMedia(media) {
       heartLikes.classList.add("fa-solid", "fa-heart", "heart-icon");
       divLikeContainer.appendChild(heartLikes);
 
-      // Ajouter un gestionnaire d'événements pour augmenter les likes
-      heartLikes.addEventListener("click", () => {
-        // Augmenter le nombre de likes
-        mediaItem.likes++;
-        // Mettre à jour le texte du paragraphe des likes
-        likesParagraph.textContent = mediaItem.likes;
-      });
+       // Ajouter un gestionnaire d'événements pour augmenter les likes
 
+       mediaItem.isLiked = false;
+
+       heartLikes.addEventListener("click", () => {
+        if (mediaItem.isLiked === false) {
+          mediaItem.likes++;
+          mediaItem.isLiked = true;
+        } else if (mediaItem.isLiked === true){
+          mediaItem.likes--;
+          mediaItem.isLiked = false;
+        }
+        
+        likesParagraph.textContent = mediaItem.likes;
+      })
+      
       //div regroupant likes et coeur
 
       const likesStyle = document.createElement("div");

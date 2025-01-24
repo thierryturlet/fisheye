@@ -44,3 +44,29 @@ async function getPhotographers() {
     
     return mediaToFind
 }
+
+async function getLikesPhotographer() {
+  const response = await fetch("http://127.0.0.1:5500/data/photographers.json");
+  const data = await response.json();
+  let mediaList = data.media;
+  
+  // Filtre les médias du photographe spécifié
+  let photographerMedia = mediaList.filter((media) => media.photographerId == id);
+  
+  // Récupère tous les likes dans un tableau
+  let allLikes = [];
+  photographerMedia.forEach((media) => {
+    if (media.likes) {
+      allLikes.push(media.likes);
+    }
+  });
+  
+  // Additionne tous les likes
+  let totalLikes = 0;
+for (let like of allLikes) {
+  totalLikes += like;
+}
+  
+  console.log(`Total likes for photographer ${id}: ${totalLikes}`);
+  return totalLikes;
+}
