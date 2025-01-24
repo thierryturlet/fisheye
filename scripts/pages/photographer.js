@@ -10,7 +10,7 @@ async function main() {
   displayPhotographerInfo(photographer);
   displayMedia(media);
   
-  getLikesPhotographer();
+  getLikesPhotographer(idFromUrl);
 
 }
 

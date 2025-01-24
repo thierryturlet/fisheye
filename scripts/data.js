@@ -45,7 +45,7 @@ async function getPhotographers() {
     return mediaToFind
 }
 
-async function getLikesPhotographer() {
+async function getLikesPhotographer(id) {
   const response = await fetch("http://127.0.0.1:5500/data/photographers.json");
   const data = await response.json();
   let mediaList = data.media;
