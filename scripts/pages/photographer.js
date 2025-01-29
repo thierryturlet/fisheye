@@ -151,9 +151,7 @@ function displayMedia(media, photographer,totalLikes,) {
 
   // Ajouter les éléments créés à la bannière
 
-  bannerElement.appendChild(likesElement)
-  bannerElement.appendChild(likesElement);
-  bannerElement.appendChild(priceElement);
+ 
   
 
 }

@@ -202,12 +202,6 @@ button.contact-button:hover {
     font-weight: bold;   
 }
 
-/*css pour le coeur de la banniere*/
-
-.fa-solid.fa-heart{
-    color: black;
-}
-
 /*css pour coeur etlikes*/
 
 .stylediv{
@@ -216,9 +210,25 @@ button.contact-button:hover {
     gap:5px;
 }
    
-   
+ /*css pour la banniere*/
 
+.fa-solid.fa-heart{
+    color: black;
+}  
 
+.bannerlikes{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 100px;  
+}
+
+.bannerstyle{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap:10px;
+}
 
 
 
