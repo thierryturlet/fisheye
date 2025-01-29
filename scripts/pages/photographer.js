@@ -139,19 +139,12 @@ function displayMedia(media, photographer,totalLikes,) {
 
   //Ajout de la banniere like et prix joiurnalier
 
-  const bannerElement = document.querySelector(".bannerlikes");
 
   const likesElement = document.querySelector(".totalikes");
   likesElement.textContent = totalLikes; 
 
-  const heartLikes = document.querySelector(".fa-solid fa-heart");
-
-  const priceElement = document.querySelector(".tarifjournalier"); // ou document.createElement("span");
-  priceElement.textContent = `${photographer.price} €/jour`; // Assurez-vous que photographer.price est défini
-
-  // Ajouter les éléments créés à la bannière
-
- 
+  const priceElement = document.querySelector(".tarifjournalier"); 
+  priceElement.textContent = `${photographer.price} €/jour`; 
   
 
 }
