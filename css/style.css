@@ -226,12 +226,24 @@ button.contact-button:hover {
     bottom: 0px;
     right: 20px;
     background-color: #db8876;
-    border-radius: 5px;
+    border-radius: 5px 5px 0px 0px ;
     z-index: 5;
     width:250px;
     flex-shrink: 0;
     padding: 10px 25px;
 }
+
+.bannerlikes p.tarifjournalier,
+.bannerlikes p.totalikes {
+    color: #000;
+    text-align: center;
+    font-family: "DM Sans";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: bold;
+    line-height: normal;
+}
+
 
 
 .bannerstyle{
