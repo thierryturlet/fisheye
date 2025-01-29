@@ -141,10 +141,12 @@ function displayMedia(media, photographer,totalLikes,) {
 
   const bannerElement = document.querySelector(".bannerlikes");
 
-  const likesElement = document.createElement("p");
+  const likesElement = document.querySelector(".totalikes");
   likesElement.textContent = totalLikes; 
 
-  const priceElement = document.createElement("p"); // ou document.createElement("span");
+  const heartLikes = document.querySelector(".fa-solid fa-heart");
+
+  const priceElement = document.querySelector(".tarifjournalier"); // ou document.createElement("span");
   priceElement.textContent = `${photographer.price} €/jour`; // Assurez-vous que photographer.price est défini
 
   // Ajouter les éléments créés à la bannière

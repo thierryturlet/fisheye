@@ -202,7 +202,11 @@ button.contact-button:hover {
     font-weight: bold;   
 }
 
+/*css pour le coeur de la banniere*/
 
+.fa-solid.fa-heart{
+    color: black;
+}
 
 /*css pour coeur etlikes*/
 
