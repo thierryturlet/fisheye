@@ -1,58 +1,55 @@
 async function getPhotographers() {
-    const response = await fetch("http://127.0.0.1:5500/data/photographers.json");
-  
-    const data = await response.json();
-  
-    return data.photographers;
-  }
+  const response = await fetch("http://127.0.0.1:5500/data/photographers.json");
 
-  async function getPhotographerById(id) {
-    const response = await fetch("http://127.0.0.1:5500/data/photographers.json");
-  
-    const data = await response.json();
-  
-    let photographerList = data.photographers;
-    console.log(id)
-    console.log(photographerList)
-    let photographerToFind = null
+  const data = await response.json();
 
-    photographerList.forEach((photographer) => {
-        
-        if(id==photographer.id){
-           photographerToFind = photographer
-        } 
+  return data.photographers;
+}
 
+async function getPhotographerById(id) {
+  const response = await fetch("http://127.0.0.1:5500/data/photographers.json");
 
-    })
-    return photographerToFind
-  }
-  
-  
-  async function  getMediaPhotographer(id){
-    const response = await fetch("http://127.0.0.1:5500/data/photographers.json");
-  
-    const data = await response.json();
+  const data = await response.json();
 
-    let mediaList = data.media;
-    console.log(id)
-    console.log(mediaList)
-    
+  let photographerList = data.photographers;
+  console.log(id);
+  console.log(photographerList);
+  let photographerToFind = null;
 
-    let mediaToFind = mediaList.filter((media) => media.photographerId == id);
-    console.log(mediaToFind)
+  photographerList.forEach((photographer) => {
+    if (id == photographer.id) {
+      photographerToFind = photographer;
+    }
+  });
+  return photographerToFind;
+}
 
-    
-    return mediaToFind
+async function getMediaPhotographer(id) {
+  const response = await fetch("http://127.0.0.1:5500/data/photographers.json");
+
+  const data = await response.json();
+
+  let mediaList = data.media;
+  console.log(id);
+  console.log(mediaList);
+
+  let mediaToFind = mediaList.filter((media) => media.photographerId == id);
+  console.log(mediaToFind);
+
+  return mediaToFind;
 }
 
 async function getLikesPhotographer(id) {
   const response = await fetch("http://127.0.0.1:5500/data/photographers.json");
   const data = await response.json();
   let mediaList = data.media;
-  
+
   // Filtre les médias du photographe spécifié
-  let photographerMedia = mediaList.filter((media) => media.photographerId == id);
   
+  let photographerMedia = mediaList.filter(
+    (media) => media.photographerId == id
+  );
+
   // Récupère tous les likes dans un tableau
   let allLikes = [];
   photographerMedia.forEach((media) => {
@@ -60,13 +57,13 @@ async function getLikesPhotographer(id) {
       allLikes.push(media.likes);
     }
   });
-  
+
   // Additionne tous les likes
   let totalLikes = 0;
-for (let like of allLikes) {
-  totalLikes += like;
-}
-  
+  for (let like of allLikes) {
+    totalLikes += like;
+  }
+
   console.log(`Total likes for photographer ${id}: ${totalLikes}`);
   return totalLikes;
 }

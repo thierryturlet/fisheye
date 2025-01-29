@@ -2,16 +2,16 @@ async function main() {
   const params = new URLSearchParams(window.location.search);
   const idFromUrl = params.get("id");
   console.log(idFromUrl);
-  let photographer = await getPhotographerById(idFromUrl);
 
+  let photographer = await getPhotographerById(idFromUrl);
   let media = await getMediaPhotographer(idFromUrl);
   console.log(media);
 
-  displayPhotographerInfo(photographer);
-  displayMedia(media);
-  
-  getLikesPhotographer(idFromUrl);
+  // Récupérer le total des likes
+  const totalLikes = await getLikesPhotographer(idFromUrl); 
 
+  displayPhotographerInfo(photographer);
+  displayMedia(media, photographer, totalLikes); // Passer totalLikes à displayMedia
 }
 
 function displayPhotographerInfo(photographer) {
@@ -50,7 +50,7 @@ function displayPhotographerInfo(photographer) {
   console.log(photographer.portrait);
 }
 
-function displayMedia(media) {
+function displayMedia(media, photographer,totalLikes) {
   // Boucler sur chaque media
   media.forEach((mediaItem) => {
     const mediaContainer = document.getElementById("media-container");
@@ -69,56 +69,6 @@ function displayMedia(media) {
         "./photos/imagesetvideos/" + photographerFolder + "/" + mediaItem.image;
       mediaElement.appendChild(imageElement);
       console.log(imageElement);
-
-      // Créer une div pour le titre et les likes
-      const divLikeContainer = document.createElement("div");
-      divLikeContainer.classList.add("container-likes");
-
-      // Ajouter un paragraphe pour le titre
-      const titleParagraph = document.createElement("p");
-      titleParagraph.textContent = mediaItem.title;
-      divLikeContainer.appendChild(titleParagraph); // Ajouter le titre à la div
-
-      // Ajouter un paragraphe pour les likes
-      const likesParagraph = document.createElement("p");
-      likesParagraph.textContent = mediaItem.likes;
-      divLikeContainer.appendChild(likesParagraph); // Ajouter les likes à la div
-
-      //Ajout des coeurs
-
-      const heartLikes = document.createElement("i");
-      heartLikes.classList.add("fa-solid", "fa-heart", "heart-icon");
-      divLikeContainer.appendChild(heartLikes);
-
-       // Ajouter un gestionnaire d'événements pour augmenter les likes
-
-       mediaItem.isLiked = false;
-
-       heartLikes.addEventListener("click", () => {
-        if (mediaItem.isLiked === false) {
-          mediaItem.likes++;
-          mediaItem.isLiked = true;
-        } else if (mediaItem.isLiked === true){
-          mediaItem.likes--;
-          mediaItem.isLiked = false;
-        }
-        
-        likesParagraph.textContent = mediaItem.likes;
-      });
-
-      //div regroupant likes et coeur
-
-      const likesStyle = document.createElement("div");
-      likesStyle.appendChild(likesParagraph);
-      likesStyle.appendChild(heartLikes);
-      likesStyle.classList.add("stylediv");
-
-      // Ajouter la div des likes au conteneur principal
-      divLikeContainer.appendChild(likesStyle);
-
-      // Ajouter la div au mediaElement
-      mediaElement.appendChild(divLikeContainer);
-      console.log(divLikeContainer);
     } else if (mediaItem.video) {
       // Ajouter une vidéo
       const videoElement = document.createElement("video");
@@ -129,61 +79,85 @@ function displayMedia(media) {
       videoElement.controls = true; // Ajout des contrôles pour la vidéo
       mediaElement.appendChild(videoElement);
       console.log(videoElement);
-
-      // Créer une div pour le titre et les likes
-      const divLikeContainer = document.createElement("div");
-      divLikeContainer.classList.add("container-likes");
-
-      // Ajouter un paragraphe pour le titre
-      const titleParagraph = document.createElement("p");
-      titleParagraph.textContent = mediaItem.title;
-      divLikeContainer.appendChild(titleParagraph); // Ajouter le titre à la div
-
-      // Ajouter un paragraphe pour les likes
-      const likesParagraph = document.createElement("p");
-      likesParagraph.textContent = mediaItem.likes;
-      divLikeContainer.appendChild(likesParagraph); // Ajouter les likes à la div
-
-      //Ajout des coeurs
-
-      const heartLikes = document.createElement("i");
-      heartLikes.classList.add("fa-solid", "fa-heart", "heart-icon");
-      divLikeContainer.appendChild(heartLikes);
-
-       // Ajouter un gestionnaire d'événements pour augmenter les likes
-
-       mediaItem.isLiked = false;
-
-       heartLikes.addEventListener("click", () => {
-        if (mediaItem.isLiked === false) {
-          mediaItem.likes++;
-          mediaItem.isLiked = true;
-        } else if (mediaItem.isLiked === true){
-          mediaItem.likes--;
-          mediaItem.isLiked = false;
-        }
-        
-        likesParagraph.textContent = mediaItem.likes;
-      })
-      
-      //div regroupant likes et coeur
-
-      const likesStyle = document.createElement("div");
-      likesStyle.appendChild(likesParagraph);
-      likesStyle.appendChild(heartLikes);
-      likesStyle.classList.add("stylediv");
-
-      // Ajouter la div des likes au conteneur principal
-      divLikeContainer.appendChild(likesStyle);
-
-      // Ajouter la div au mediaElement
-      mediaElement.appendChild(divLikeContainer);
-      console.log(divLikeContainer);
     }
+
+    // Créer une div pour le titre et les likes
+    const divLikeContainer = document.createElement("div");
+    divLikeContainer.classList.add("container-likes");
+
+    // Ajouter un paragraphe pour le titre
+    const titleParagraph = document.createElement("p");
+    titleParagraph.textContent = mediaItem.title;
+    divLikeContainer.appendChild(titleParagraph); // Ajouter le titre à la div
+
+    // Ajouter un paragraphe pour les likes
+    const likesParagraph = document.createElement("p");
+    likesParagraph.textContent = mediaItem.likes;
+    divLikeContainer.appendChild(likesParagraph); // Ajouter les likes à la div
+
+    //Ajout des coeurs
+
+    const heartLikes = document.createElement("i");
+    heartLikes.classList.add("fa-solid", "fa-heart", "heart-icon");
+    divLikeContainer.appendChild(heartLikes);
+
+    // Ajouter un gestionnaire d'événements pour augmenter les likes
+
+    mediaItem.isLiked = false;
+
+    heartLikes.addEventListener("click", () => {
+      if (mediaItem.isLiked === false) {
+        mediaItem.likes++;
+        mediaItem.isLiked = true;
+      } else if (mediaItem.isLiked === true) {
+        mediaItem.likes--;
+        mediaItem.isLiked = false;
+      }
+
+      likesParagraph.textContent = mediaItem.likes;
+    });
+
+    //div regroupant likes et coeur
+
+    const likesStyle = document.createElement("div");
+    likesStyle.appendChild(likesParagraph);
+    likesStyle.appendChild(heartLikes);
+    likesStyle.classList.add("stylediv");
+
+    // Ajouter la div des likes au conteneur principal
+    divLikeContainer.appendChild(likesStyle);
+
+    // Ajouter la div au mediaElement
+    mediaElement.appendChild(divLikeContainer);
+    console.log(divLikeContainer);
 
     // Ajouter l'élément média au conteneur principal
     mediaContainer.appendChild(mediaElement);
+
+    // Ajout de la div tarif journalier
   });
+
+  //Ajout de la banniere like et prix joiurnalier
+
+  const bannerElement = document.querySelector(".bannerlikes");
+
+  
+  const likesElement = document.createElement("p");
+  likesElement.textContent = totalLikes; 
+
+  const heartLikes = document.createElement("i");
+  heartLikes.classList.add("fa-solid", "fa-heart", "heart-icon");
+  
+  const priceElement = document.createElement("p"); // ou document.createElement("span");
+  priceElement.textContent = `${photographer.price} €/jour`; // Assurez-vous que photographer.price est défini
+
+  // Ajouter les éléments créés à la bannière
+
+  bannerElement.appendChild(likesElement)
+  bannerElement.appendChild(likesElement);
+  bannerElement.appendChild(priceElement);
+  bannerElement.appendChild(heartLikes);
+
 }
 
 main();
