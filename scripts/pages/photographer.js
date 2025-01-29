@@ -11,7 +11,7 @@ async function main() {
   const totalLikes = await getLikesPhotographer(idFromUrl); 
 
   displayPhotographerInfo(photographer);
-  displayMedia(media, photographer, totalLikes); // Passer totalLikes à displayMedia
+  displayMedia(media, photographer, totalLikes ,); // Passer totalLikes à displayMedia
 }
 
 function displayPhotographerInfo(photographer) {
@@ -50,7 +50,7 @@ function displayPhotographerInfo(photographer) {
   console.log(photographer.portrait);
 }
 
-function displayMedia(media, photographer,totalLikes) {
+function displayMedia(media, photographer,totalLikes,) {
   // Boucler sur chaque media
   media.forEach((mediaItem) => {
     const mediaContainer = document.getElementById("media-container");
@@ -141,13 +141,9 @@ function displayMedia(media, photographer,totalLikes) {
 
   const bannerElement = document.querySelector(".bannerlikes");
 
-  
   const likesElement = document.createElement("p");
   likesElement.textContent = totalLikes; 
 
-  const heartLikes = document.createElement("i");
-  heartLikes.classList.add("fa-solid", "fa-heart", "heart-icon");
-  
   const priceElement = document.createElement("p"); // ou document.createElement("span");
   priceElement.textContent = `${photographer.price} €/jour`; // Assurez-vous que photographer.price est défini
 
@@ -156,7 +152,7 @@ function displayMedia(media, photographer,totalLikes) {
   bannerElement.appendChild(likesElement)
   bannerElement.appendChild(likesElement);
   bannerElement.appendChild(priceElement);
-  bannerElement.appendChild(heartLikes);
+  
 
 }
 
