@@ -221,14 +221,12 @@ button.contact-button:hover {
     flex-direction: row;
     justify-content: flex-end;
     gap: 100px;
-    
     position: fixed;
     bottom: 0px;
     right: 20px;
     background-color: #db8876;
     border-radius: 5px 5px 0px 0px ;
     z-index: 5;
-    width:250px;
     padding: 10px 25px;
 }
 

@@ -67,3 +67,5 @@ async function getLikesPhotographer(id) {
   console.log(`Total likes for photographer ${id}: ${totalLikes}`);
   return totalLikes;
 }
+
+

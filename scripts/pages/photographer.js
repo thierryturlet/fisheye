@@ -8,13 +8,13 @@ async function main() {
   console.log(media);
 
   // Récupérer le total des likes
-  const totalLikes = await getLikesPhotographer(idFromUrl); 
+  const totalLikes = await getLikesPhotographer(idFromUrl);
 
-  displayPhotographerInfo(photographer);
-  displayMedia(media, photographer, totalLikes ,); // Passer totalLikes à displayMedia
+  displayPhotographerInfo(photographer, totalLikes, );
+  displayMedia(media,totalLikes); // Passer totalLikes à displayMedia
 }
 
-function displayPhotographerInfo(photographer) {
+function displayPhotographerInfo(photographer, totalLikes) {
   document.getElementById("name-container").innerHTML = photographer.name;
   document.getElementById(
     "infos-container"
@@ -48,9 +48,17 @@ function displayPhotographerInfo(photographer) {
   );
   console.log(photographer.tagline);
   console.log(photographer.portrait);
+
+  //Ajout de la banniere like et prix joiurnalier
+
+  const likesElement = document.querySelector(".totalikes");
+  likesElement.textContent = totalLikes;
+
+  const priceElement = document.querySelector(".tarifjournalier");
+  priceElement.textContent = `${photographer.price} €/jour`;
 }
 
-function displayMedia(media, photographer,totalLikes,) {
+function displayMedia(media) {
   // Boucler sur chaque media
   media.forEach((mediaItem) => {
     const mediaContainer = document.getElementById("media-container");
@@ -134,19 +142,42 @@ function displayMedia(media, photographer,totalLikes,) {
     // Ajouter l'élément média au conteneur principal
     mediaContainer.appendChild(mediaElement);
 
-    // Ajout de la div tarif journalier
-  });
+    //lors du click additionne au nombre total de likes du journaliste
 
-  //Ajout de la banniere like et prix joiurnalier
+    // Initialisation des likes et de l'état "liked"
+    let isLiked = false;
+    let currentLikes = mediaItem.likes;
+
+    // Supposons que totalLikes soit initialisé quelque part dans ton code, par exemple :
+    let totalLikes = parseInt(document.querySelector(".totalikes").textContent, 10);
+
+    // Gestionnaire d'événements pour les clics sur le cœur
+    heartLikes.addEventListener("click", () => {
+    // Si l'élément n'est pas aimé
+    if (!isLiked) {
+      currentLikes++; // Incrémenter les likes de ce média
+      totalLikes++;   // Incrémenter le total des likes
+      isLiked = true;  // Marquer comme "aimé"
+    } 
+    else {
+      currentLikes--; // Décrémenter les likes de ce média
+      totalLikes--;   // Décrémenter le total des likes
+      isLiked = false; // Marquer comme "non aimé"
+    }
+
+  // Mise à jour du texte des likes du média dans le paragraphe
+  likesParagraph.textContent = currentLikes;
+
+  // Mise à jour du total des likes
+  document.querySelector(".totalikes").textContent = totalLikes;
+});
+
+    });
+    
+};
 
 
-  const likesElement = document.querySelector(".totalikes");
-  likesElement.textContent = totalLikes; 
-
-  const priceElement = document.querySelector(".tarifjournalier"); 
-  priceElement.textContent = `${photographer.price} €/jour`; 
   
 
-}
 
 main();
