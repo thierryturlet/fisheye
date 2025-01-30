@@ -112,17 +112,21 @@ function displayMedia(media) {
     // Ajouter un gestionnaire d'événements pour augmenter les likes
 
     mediaItem.isLiked = false;
-
+    
     heartLikes.addEventListener("click", () => {
+      let totalLikes = parseInt(document.querySelector(".totalikes").textContent, 10);
       if (mediaItem.isLiked === false) {
         mediaItem.likes++;
         mediaItem.isLiked = true;
+        totalLikes++;
       } else if (mediaItem.isLiked === true) {
         mediaItem.likes--;
         mediaItem.isLiked = false;
+        totalLikes--;
       }
 
       likesParagraph.textContent = mediaItem.likes;
+      document.querySelector(".totalikes").textContent = totalLikes;
     });
 
     //div regroupant likes et coeur
@@ -142,41 +146,9 @@ function displayMedia(media) {
     // Ajouter l'élément média au conteneur principal
     mediaContainer.appendChild(mediaElement);
 
-    //lors du click additionne au nombre total de likes du journaliste
-
-    // Initialisation des likes et de l'état "liked"
-    let isLiked = false;
-    let currentLikes = mediaItem.likes;
-
-    // Supposons que totalLikes soit initialisé quelque part dans ton code, par exemple :
-    let totalLikes = parseInt(document.querySelector(".totalikes").textContent, 10);
-
-    // Gestionnaire d'événements pour les clics sur le cœur
-    heartLikes.addEventListener("click", () => {
-    // Si l'élément n'est pas aimé
-    if (!isLiked) {
-      currentLikes++; // Incrémenter les likes de ce média
-      totalLikes++;   // Incrémenter le total des likes
-      isLiked = true;  // Marquer comme "aimé"
-    } 
-    else {
-      currentLikes--; // Décrémenter les likes de ce média
-      totalLikes--;   // Décrémenter le total des likes
-      isLiked = false; // Marquer comme "non aimé"
-    }
-
-  // Mise à jour du texte des likes du média dans le paragraphe
-  likesParagraph.textContent = currentLikes;
-
-  // Mise à jour du total des likes
-  document.querySelector(".totalikes").textContent = totalLikes;
-});
-
     });
     
 };
-
-
   
 
 
