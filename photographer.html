@@ -2,18 +2,24 @@
 <html>
   <head>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
-    <meta charset="utf-8">
-    <link rel="icon" type="image/png" href="assets/favicon.png">
-    <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
-    integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" >
-    <title>Fisheye - photographe </title>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <link
+      href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Fisheye - photographe</title>
   </head>
   <body>
     <header>
       <img src="assets/images/logo.png" class="logo" />
-  
     </header>
     <main id="main">
       <div class="photograph-header">
@@ -21,37 +27,52 @@
           <h2 id="name-container"></h2>
           <p id="infos-container"></p>
           <p id="tagline-container"></p>
-        </div>  
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+        </div>
+     
+        <button class="contact_button" onclick="displayModal()">
+          Contactez-moi
+        </button>
         <div id="image-container">
-          <img id="photographer-portrait"/>
+          <img id="photographer-portrait" />
         </div>
       </div>
+      
+      <!--banniere deroulante-->
+      
+      <div id="dropdown-container" class="dropdown">
+        <label id="dropdown-label" for="sort-select" class="dropdown-label">Trier par :</label>
+        <select id="sort-select" class="dropdown-select" data-js="sort-select">
+          <option id="option-popularite" value="popularite" class="dropdown-option">Popularité</option>
+          <option id="option-date" value="date" class="dropdown-option">Date</option>
+          <option id="option-titre" value="titre" class="dropdown-option">Titre</option>
+        </select>
+      </div>
+      
       <!-- all media by photograph -->
-      <div id="media-container"></div>
+<div id="media-container"></div>
       <div class="bannerlikes">
         <div class="bannerstyle">
-        <p class="totalikes"></p>
-        <i class="fa-solid fa-heart"></i>
-      </div>
+          <p class="totalikes"></p>
+          <i class="fa-solid fa-heart"></i>
+        </div>
         <p class="tarifjournalier"></p>
       </div>
     </main>
     <div id="contact_modal">
-			<div class="modal">
-				<header>
+      <div class="modal">
+        <header>
           <h2>Contactez-moi</h2>
           <img src="assets/icons/close.svg" onclick="closeModal()" />
         </header>
-				<form>
-					<div>
-						<label>Prénom</label>
-						<input />
-					</div>
+        <form>
+          <div>
+            <label>Prénom</label>
+            <input />
+          </div>
           <button class="contact_button">Envoyer</button>
-				</form>
-			</div>
-		</div>
+        </form>
+      </div>
+    </div>
     <script src="scripts/data.js"></script>
     <script src="/scripts/pages/photographer.js"></script>
     <script src="/scripts/utils/contactForms.js"></script>
