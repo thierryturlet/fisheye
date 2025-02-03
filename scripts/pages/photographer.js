@@ -155,6 +155,32 @@ function displayMedia(media) {
 
 main();
 
+// Sélection du conteneur
+const container = document.getElementById("dropdown-container");
+
+// Création du label
+const label = document.createElement("label");
+label.textContent = "Trier par :";
+label.htmlFor = "sort-select";
+
+// Création du select
+const select = document.createElement("select");
+select.id = "sort-select";
+
+// Liste des options
+const options = ["Popularité", "Date", "Titre"];
+
+// Ajout des options
+options.forEach(text => {
+  let option = document.createElement("option");
+  option.textContent = text;
+  option.value = text.toLowerCase();
+  select.appendChild(option);
+});
+
+// Ajout au DOM
+container.appendChild(label);
+container.appendChild(select);
 
 
 
