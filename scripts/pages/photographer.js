@@ -158,11 +158,32 @@ function displayDropdown(){
 
   const dropdownContainer = document.querySelector("#dropdown-container");
   console.log(dropdownContainer)
-  dropdownContainer.textContent = "Popularité";
-  const fleche = document.createElement("i");
-  fleche.classList.add("fa-solid","fa-angle-up");
-  dropdownContainer.appendChild(fleche);
-  console.log(fleche)
+  
+  // Ajoutez le texte "Popularité"
+  const titledropdown = document.createElement("span");
+  titledropdown.textContent = "Popularité";
+  dropdownContainer.appendChild(titledropdown);
+ 
+  
+   // Créez l'icône de flèche vers le haut
+   const fleche = document.createElement("i");
+   fleche.classList.add("fa-solid", "fa-angle-up");
+   dropdownContainer.appendChild(fleche)
+
+    // Ajoutez un événement de clic à la flèche
+    fleche.addEventListener("click", () => {
+      // Change l'icône en fonction de son état actuel
+      if (fleche.classList.contains("fa-angle-up")) {
+        fleche.classList.remove("fa-angle-up"); // Retire l'icône vers le haut
+        fleche.classList.add("fa-chevron-down"); // Ajoute l'icône vers le bas
+      } else {
+        fleche.classList.remove("fa-chevron-down"); // Retire l'icône vers le bas
+        fleche.classList.add("fa-angle-up"); // Remet l'icône vers le haut
+      }
+
+
+    });
+
 
 }
 

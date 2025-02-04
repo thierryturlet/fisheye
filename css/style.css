@@ -269,12 +269,12 @@ button.contact-button:hover {
     align-items: center;
 }
 
-.fa-solid.fa-angle-up{
-    font-size: 15px;
-    color: white;
+.fa-solid.fa-angle-up,
+.fa-solid.fa-chevron-down {
+  font-size: 15px;
+  color: white;
 }
-.fa-solid.fa-chevron-down{
-    font-size: 15px;
-    color: white;
-    
-}
+
+.hidden {
+    display: none; /* Cache les éléments */
+  }
