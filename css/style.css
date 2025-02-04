@@ -251,5 +251,30 @@ button.contact-button:hover {
     gap:10px;
 }
 
+/* liste depliante*/
 
+#dropdown-container{
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    padding: 11px;
+    width: 170px;
+    height: 50px;
+    border: none;
+    background-color: #901C1C;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
+.fa-solid.fa-angle-up{
+    font-size: 15px;
+    color: white;
+}
+.fa-solid.fa-chevron-down{
+    font-size: 15px;
+    color: white;
+    
+}

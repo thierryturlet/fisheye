@@ -10,8 +10,10 @@ async function main() {
   // Récupérer le total des likes
   const totalLikes = await getLikesPhotographer(idFromUrl);
 
-  displayPhotographerInfo(photographer, totalLikes, );
-  displayMedia(media,totalLikes); // Passer totalLikes à displayMedia
+  displayPhotographerInfo(photographer, totalLikes);
+  displayMedia(media, totalLikes); // Passer totalLikes à displayMedia
+
+  displayDropdown()
 }
 
 function displayPhotographerInfo(photographer, totalLikes) {
@@ -112,9 +114,12 @@ function displayMedia(media) {
     // Ajouter un gestionnaire d'événements pour augmenter les likes
 
     mediaItem.isLiked = false;
-    
+
     heartLikes.addEventListener("click", () => {
-      let totalLikes = parseInt(document.querySelector(".totalikes").textContent, 10);
+      let totalLikes = parseInt(
+        document.querySelector(".totalikes").textContent,
+        10
+      );
       if (mediaItem.isLiked === false) {
         mediaItem.likes++;
         mediaItem.isLiked = true;
@@ -145,42 +150,20 @@ function displayMedia(media) {
 
     // Ajouter l'élément média au conteneur principal
     mediaContainer.appendChild(mediaElement);
-
-    });
-    
-};
-  
+  });
+}
 
 
+function displayDropdown(){
+
+  const dropdownContainer = document.querySelector("#dropdown-container");
+  console.log(dropdownContainer)
+  dropdownContainer.textContent = "Popularité";
+  const fleche = document.createElement("i");
+  fleche.classList.add("fa-solid","fa-angle-up");
+  dropdownContainer.appendChild(fleche);
+  console.log(fleche)
+
+}
 
 main();
-
-// Sélection du conteneur
-const container = document.getElementById("dropdown-container");
-
-// Création du label
-const label = document.createElement("label");
-label.textContent = "Trier par :";
-label.htmlFor = "sort-select";
-
-// Création du select
-const select = document.createElement("select");
-select.id = "sort-select";
-
-// Liste des options
-const options = ["Popularité", "Date", "Titre"];
-
-// Ajout des options
-options.forEach(text => {
-  let option = document.createElement("option");
-  option.textContent = text;
-  option.value = text.toLowerCase();
-  select.appendChild(option);
-});
-
-// Ajout au DOM
-container.appendChild(label);
-container.appendChild(select);
-
-
-
