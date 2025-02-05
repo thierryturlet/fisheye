@@ -172,18 +172,20 @@ function displayDropdown() {
 
   dropdownContainer.appendChild(dropdownButton);
 
-  const dropdouwnOPtions = document.createElement("div");
-  dropdouwnOPtions.classList.add("dropdown-options","close");
+  const dropdownOPtions = document.createElement("div");
+  dropdownOPtions.classList.add("dropdown-options","close");
+  console.log(dropdownOPtions); // Vérifie que ce n'est pas "undefined" ou "null"
+
 
   const firstOptionDropdown = document.createElement("span");
   firstOptionDropdown.textContent = "Date";
-  dropdouwnOPtions.appendChild(firstOptionDropdown);
+  dropdownOPtions.appendChild(firstOptionDropdown);
 
   const secondOptionDropdown = document.createElement("span");
   secondOptionDropdown.textContent = "Titre";
-  dropdouwnOPtions.appendChild(secondOptionDropdown);
+  dropdownOPtions.appendChild(secondOptionDropdown);
 
-  dropdownContainer.appendChild(dropdouwnOPtions);
+  dropdownContainer.appendChild(dropdownOPtions);
 
   // Ajoutez un événement de clic à la flèche
   fleche.addEventListener("click", () => {
@@ -191,14 +193,14 @@ function displayDropdown() {
     if (fleche.classList.contains("fa-angle-up")) {
       fleche.classList.remove("fa-angle-up"); // Retire l'icône vers le haut
       fleche.classList.add("fa-chevron-down"); // Ajoute l'icône vers le bas
-      dropdouwnOPtions.classList.remove("close");
-      dropdouwnOPtions.classList.add("open");
+      dropdownOPtions.classList.remove("close");
+      dropdownOPtions.classList.add("open");
 
     } else {
       fleche.classList.remove("fa-chevron-down"); // Retire l'icône vers le bas
       fleche.classList.add("fa-angle-up"); // Remet l'icône vers le haut
-      dropdouwnOPtions.classList.remove("close");
-      dropdouwnOPtions.classList.add("open");
+      dropdownOPtions.classList.remove("open");
+      dropdownOPtions.classList.add = ("close"); // Affiche le menu
       
      
     }

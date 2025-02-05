@@ -253,7 +253,7 @@ button.contact-button:hover {
 
 /* liste depliante*/
 
-#dropdown-container{
+#dropdown-container {
     font-size: 20px;
     font-weight: bold;
     color: white;
@@ -268,18 +268,19 @@ button.contact-button:hover {
 }
 
 
-.close{
+.close {
     display: none !important;
 }
-.open{
-    display: block;
+.open {
+    display:block;
+  
 }
 
 .title-dropdown{
     display: flex;
     justify-content: space-between;
 }
-.dropdown-optipns{
+.dropdown-options{
     display: flex;
-    flex-direction: column;
+    flex-direction:column;
 }
