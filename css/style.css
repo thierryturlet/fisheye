@@ -259,22 +259,27 @@ button.contact-button:hover {
     color: white;
     padding: 11px;
     width: 170px;
-    height: 50px;
     border: none;
     background-color: #901C1C;
     border-radius: 5px;
     cursor: pointer;
     display: flex;
+    flex-direction: column;
+}
+
+
+.close{
+    display: none !important;
+}
+.open{
+    display: block;
+}
+
+.title-dropdown{
+    display: flex;
     justify-content: space-between;
-    align-items: center;
 }
-
-.fa-solid.fa-angle-up,
-.fa-solid.fa-chevron-down {
-  font-size: 15px;
-  color: white;
+.dropdown-optipns{
+    display: flex;
+    flex-direction: column;
 }
-
-.hidden {
-    display: none; /* Cache les éléments */
-  }
