@@ -152,11 +152,9 @@ function displayMedia(media) {
     mediaContainer.appendChild(mediaElement);
   });
 }
-
 function displayDropdown() {
   const dropdownContainer = document.querySelector("#dropdown-container");
   console.log(dropdownContainer);
-
   const dropdownButton = document.createElement("div");
   dropdownButton.classList.add("title-dropdown");
 
@@ -170,7 +168,6 @@ function displayDropdown() {
   const fleche = document.createElement("i");
   fleche.classList.add("fa-solid", "fa-angle-up");
   dropdownButton.appendChild(fleche);
-
   dropdownContainer.appendChild(dropdownButton);
 
   const dropdownOPtions = document.createElement("div");
@@ -185,12 +182,10 @@ function displayDropdown() {
   const secondOptionDropdown = document.createElement("span");
   secondOptionDropdown.textContent = "Titre";
   dropdownOPtions.appendChild(secondOptionDropdown);
-
   dropdownContainer.appendChild(dropdownOPtions);
-
+  
   // Ajoutez un événement de clic à la flèche
-
-  const titleElement = document.querySelector(".dropdown-title");
+ 
   fleche.addEventListener("click", () => {
     // Change l'icône en fonction de son état actuel
     if (fleche.classList.contains("fa-angle-up")) {
@@ -198,17 +193,13 @@ function displayDropdown() {
       fleche.classList.add("fa-chevron-down"); // Ajoute l'icône vers le bas
       dropdownOPtions.classList.remove("close");
       dropdownOPtions.classList.add("open");
-      const titleElement = document.querySelector(".dropdown-title");
-      titleElement.style.borderBottom = '1px solid white';
-    
+      dropdownButton.style.borderBottom = '1px solid white';
     } else {
       fleche.classList.remove("fa-chevron-down"); // Retire l'icône vers le bas
       fleche.classList.add("fa-angle-up"); // Remet l'icône vers le haut
       dropdownOPtions.classList.remove("open");
       dropdownOPtions.classList.add("close"); // Affiche le menu
-     
-      titleElement.style.borderBottom = 'none';
-
+      dropdownButton.style.borderBottom = 'none';
     }
   });
 }
