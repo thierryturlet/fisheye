@@ -158,11 +158,12 @@ function displayDropdown() {
   console.log(dropdownContainer);
 
   const dropdownButton = document.createElement("div");
-  dropdownButton.classList.add("title-dropdown")
+  dropdownButton.classList.add("title-dropdown");
 
   // Ajoutez le texte "Popularité"
   const titledropdown = document.createElement("span");
   titledropdown.textContent = "Popularité";
+  titledropdown.classList.add("dropdown-title");
   dropdownButton.appendChild(titledropdown);
 
   // Créez l'icône de flèche vers le haut
@@ -173,12 +174,12 @@ function displayDropdown() {
   dropdownContainer.appendChild(dropdownButton);
 
   const dropdownOPtions = document.createElement("div");
-  dropdownOPtions.classList.add("dropdown-options","close");
+  dropdownOPtions.classList.add("dropdown-options", "close");
   console.log(dropdownOPtions); // Vérifie que ce n'est pas "undefined" ou "null"
-
 
   const firstOptionDropdown = document.createElement("span");
   firstOptionDropdown.textContent = "Date";
+  firstOptionDropdown.classList.add("option-title");
   dropdownOPtions.appendChild(firstOptionDropdown);
 
   const secondOptionDropdown = document.createElement("span");
@@ -188,6 +189,8 @@ function displayDropdown() {
   dropdownContainer.appendChild(dropdownOPtions);
 
   // Ajoutez un événement de clic à la flèche
+
+  const titleElement = document.querySelector(".dropdown-title");
   fleche.addEventListener("click", () => {
     // Change l'icône en fonction de son état actuel
     if (fleche.classList.contains("fa-angle-up")) {
@@ -195,14 +198,17 @@ function displayDropdown() {
       fleche.classList.add("fa-chevron-down"); // Ajoute l'icône vers le bas
       dropdownOPtions.classList.remove("close");
       dropdownOPtions.classList.add("open");
-
+      const titleElement = document.querySelector(".dropdown-title");
+      titleElement.style.borderBottom = 'none';
+    
     } else {
       fleche.classList.remove("fa-chevron-down"); // Retire l'icône vers le bas
       fleche.classList.add("fa-angle-up"); // Remet l'icône vers le haut
       dropdownOPtions.classList.remove("open");
-      dropdownOPtions.classList.add = ("close"); // Affiche le menu
+      dropdownOPtions.classList.add("close"); // Affiche le menu
+      titleElement.style.borderBottom = '1px solid white';
       
-     
+
     }
   });
 }

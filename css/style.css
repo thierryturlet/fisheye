@@ -257,7 +257,7 @@ button.contact-button:hover {
     font-size: 20px;
     font-weight: bold;
     color: white;
-    padding: 11px;
+    padding: 24px;
     width: 170px;
     border: none;
     background-color: #901C1C;
@@ -265,6 +265,7 @@ button.contact-button:hover {
     cursor: pointer;
     display: flex;
     flex-direction: column;
+    gap:10px;
 }
 
 
@@ -279,8 +280,24 @@ button.contact-button:hover {
 .title-dropdown{
     display: flex;
     justify-content: space-between;
+    align-items: center;
+   
 }
 .dropdown-options{
     display: flex;
     flex-direction:column;
+    gap: 10px;
+    height: 70px;
+}
+
+.dropdown-title {
+    border-bottom: 1px solid white;
+    padding-bottom: 5px;
+    width: 95%;
+}
+
+.option-title {
+    border-bottom: 1px solid white;
+    width: 90%;
+    padding-bottom: 5px;
 }
