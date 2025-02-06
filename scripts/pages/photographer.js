@@ -199,15 +199,15 @@ function displayDropdown() {
       dropdownOPtions.classList.remove("close");
       dropdownOPtions.classList.add("open");
       const titleElement = document.querySelector(".dropdown-title");
-      titleElement.style.borderBottom = 'none';
+      titleElement.style.borderBottom = '1px solid white';
     
     } else {
       fleche.classList.remove("fa-chevron-down"); // Retire l'icône vers le bas
       fleche.classList.add("fa-angle-up"); // Remet l'icône vers le haut
       dropdownOPtions.classList.remove("open");
       dropdownOPtions.classList.add("close"); // Affiche le menu
-      titleElement.style.borderBottom = '1px solid white';
-      
+     
+      titleElement.style.borderBottom = 'none';
 
     }
   });
