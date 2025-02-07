@@ -254,6 +254,8 @@ button.contact-button:hover {
 /* liste depliante*/
 
 #dropdown-container {
+    position: absolute;
+    left:190px;
     font-size: 20px;
     font-weight: bold;
     color: white;

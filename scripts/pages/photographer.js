@@ -154,54 +154,60 @@ function displayMedia(media) {
 }
 function displayDropdown() {
   const dropdownContainer = document.querySelector("#dropdown-container");
-  console.log(dropdownContainer);
+
+  const options = ["Popularité", "Date", "Titre"];
+
   const dropdownButton = document.createElement("div");
   dropdownButton.classList.add("title-dropdown");
 
-  // Ajoutez le texte "Popularité"
+  // Élément qui affiche l'option sélectionnée
   const titledropdown = document.createElement("span");
-  titledropdown.textContent = "Popularité";
+  titledropdown.textContent = options[0]; // Par défaut "Popularité"
   titledropdown.classList.add("dropdown-title");
   dropdownButton.appendChild(titledropdown);
 
-  // Créez l'icône de flèche vers le haut
+  // Icône de flèche
   const fleche = document.createElement("i");
   fleche.classList.add("fa-solid", "fa-angle-up");
   dropdownButton.appendChild(fleche);
   dropdownContainer.appendChild(dropdownButton);
 
-  const dropdownOPtions = document.createElement("div");
-  dropdownOPtions.classList.add("dropdown-options", "close");
-  console.log(dropdownOPtions); // Vérifie que ce n'est pas "undefined" ou "null"
+  // Conteneur des options
+  const dropdownOptions = document.createElement("div");
+  dropdownOptions.classList.add("dropdown-options", "close");
 
-  const firstOptionDropdown = document.createElement("span");
-  firstOptionDropdown.textContent = "Date";
-  firstOptionDropdown.classList.add("option-title");
-  dropdownOPtions.appendChild(firstOptionDropdown);
+  options.slice(1).forEach((optionText, index) => {
+    const option = document.createElement("span");
+    option.textContent = optionText;
+    option.classList.add("option-title");
 
-  const secondOptionDropdown = document.createElement("span");
-  secondOptionDropdown.textContent = "Titre";
-  dropdownOPtions.appendChild(secondOptionDropdown);
-  dropdownContainer.appendChild(dropdownOPtions);
-  
-  // Ajoutez un événement de clic à la flèche
- 
+    // Ajout d'un événement de clic sur chaque option
+    option.addEventListener("click", () => {
+      // Échange des valeurs
+      let currentText = titledropdown.textContent;
+      titledropdown.textContent = option.textContent;
+      option.textContent = currentText;
+    });
+
+    dropdownOptions.appendChild(option);
+  });
+
+  dropdownContainer.appendChild(dropdownOptions);
+
+  // Gestion de l'ouverture et fermeture du menu
   fleche.addEventListener("click", () => {
-    // Change l'icône en fonction de son état actuel
     if (fleche.classList.contains("fa-angle-up")) {
-      fleche.classList.remove("fa-angle-up"); // Retire l'icône vers le haut
-      fleche.classList.add("fa-chevron-down"); // Ajoute l'icône vers le bas
-      dropdownOPtions.classList.remove("close");
-      dropdownOPtions.classList.add("open");
-      dropdownButton.style.borderBottom = '1px solid white';
+      fleche.classList.replace("fa-angle-up", "fa-chevron-down");
+      dropdownOptions.classList.replace("close", "open");
+      dropdownButton.style.borderBottom = "1px solid white";
     } else {
-      fleche.classList.remove("fa-chevron-down"); // Retire l'icône vers le bas
-      fleche.classList.add("fa-angle-up"); // Remet l'icône vers le haut
-      dropdownOPtions.classList.remove("open");
-      dropdownOPtions.classList.add("close"); // Affiche le menu
-      dropdownButton.style.borderBottom = 'none';
+      fleche.classList.replace("fa-chevron-down", "fa-angle-up");
+      dropdownOptions.classList.replace("open", "close");
+      dropdownButton.style.borderBottom = "none";
     }
   });
 }
+
+
 
 main();
