@@ -1,6 +1,6 @@
 async function main() {
   const params = new URLSearchParams(window.location.search);
-  const idFromUrl = params.get("id");
+  const idFromUrl =  parseInt(params.get("id")); // Convertir en nombre
   console.log(idFromUrl);
 
   let photographer = await getPhotographerById(idFromUrl);
@@ -14,6 +14,37 @@ async function main() {
   displayMedia(media, totalLikes); // Passer totalLikes à displayMedia
 
   displayDropdown();
+
+  let sortedMedia = await sortMediaByPopularity(idFromUrl);
+  console.log("🔥 Médias triés par popularité :", sortedMedia);
+
+  const sorteMediaDate = await sortMediaByDate(idFromUrl) ;
+  console.log(sorteMediaDate);
+
+  const sorteMediaTitle = await sortMediaByTitle(idFromUrl) ;
+  console.log(sorteMediaTitle);
+
+   sortedMedia = await sortMediaByPopularity(idFromUrl);
+  displayMedia(sortedMedia);
+
+  document.querySelectorAll(".option-title").forEach((option) => {
+    option.addEventListener("click", async () => {
+      let selectedOption = option.textContent;
+
+      if (selectedOption === "Popularité") {
+        sortedMedia = await sortMediaByPopularity(idFromUrl);
+      } else if (selectedOption === "Date") {
+        sortedMedia = await sortMediaByDate(idFromUrl);
+      } else if (selectedOption === "Titre") {
+        sortedMedia = await sortMediaByTitle(idFromUrl);
+      }
+
+      displayMedia(sortedMedia);
+    });
+  });
+
+
+
 }
 
 function displayPhotographerInfo(photographer, totalLikes) {
@@ -61,6 +92,7 @@ function displayPhotographerInfo(photographer, totalLikes) {
 }
 
 function displayMedia(media) {
+  
   // Boucler sur chaque media
   media.forEach((mediaItem) => {
     const mediaContainer = document.getElementById("media-container");
@@ -152,7 +184,7 @@ function displayMedia(media) {
     mediaContainer.appendChild(mediaElement);
   });
 }
-6
+
 function displayDropdown() {
   const dropdownContainer = document.querySelector("#dropdown-container");
 
@@ -188,6 +220,13 @@ function displayDropdown() {
       let currentText = titledropdown.textContent;
       titledropdown.textContent = option.textContent;
       option.textContent = currentText;
+
+      closeDropdown();
+
+  
+
+
+      
     });
 
     dropdownOptions.appendChild(option);
