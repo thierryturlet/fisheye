@@ -152,6 +152,7 @@ function displayMedia(media) {
     mediaContainer.appendChild(mediaElement);
   });
 }
+6
 function displayDropdown() {
   const dropdownContainer = document.querySelector("#dropdown-container");
 
@@ -176,7 +177,7 @@ function displayDropdown() {
   const dropdownOptions = document.createElement("div");
   dropdownOptions.classList.add("dropdown-options", "close");
 
-  options.slice(1).forEach((optionText, index) => {
+  options.slice(1).forEach((optionText) => {
     const option = document.createElement("span");
     option.textContent = optionText;
     option.classList.add("option-title");
@@ -195,17 +196,27 @@ function displayDropdown() {
   dropdownContainer.appendChild(dropdownOptions);
 
   // Gestion de l'ouverture et fermeture du menu
-  fleche.addEventListener("click", () => {
+  fleche.addEventListener("click", toggleDropdown);
+
+  function toggleDropdown() {
     if (fleche.classList.contains("fa-angle-up")) {
-      fleche.classList.replace("fa-angle-up", "fa-chevron-down");
-      dropdownOptions.classList.replace("close", "open");
-      dropdownButton.style.borderBottom = "1px solid white";
+      openDropdown();
     } else {
-      fleche.classList.replace("fa-chevron-down", "fa-angle-up");
-      dropdownOptions.classList.replace("open", "close");
-      dropdownButton.style.borderBottom = "none";
+      closeDropdown();
     }
-  });
+  }
+
+  function openDropdown() {
+    fleche.classList.replace("fa-angle-up", "fa-chevron-down");
+    dropdownOptions.classList.replace("close", "open");
+    dropdownButton.style.borderBottom = '1px solid white';
+  }
+
+  function closeDropdown() {
+    fleche.classList.replace("fa-chevron-down", "fa-angle-up");
+    dropdownOptions.classList.replace("open", "close");
+    dropdownButton.style.borderBottom = 'none';
+  }
 }
 
 
