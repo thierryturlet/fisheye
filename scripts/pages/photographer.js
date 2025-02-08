@@ -16,21 +16,17 @@ async function main() {
   displayDropdown();
 
   let sortedMedia = await sortMediaByPopularity(idFromUrl);
-  console.log("🔥 Médias triés par popularité :", sortedMedia);
-
-  const sorteMediaDate = await sortMediaByDate(idFromUrl) ;
-  console.log(sorteMediaDate);
-
-  const sorteMediaTitle = await sortMediaByTitle(idFromUrl) ;
-  console.log(sorteMediaTitle);
-
-   sortedMedia = await sortMediaByPopularity(idFromUrl);
   displayMedia(sortedMedia);
 
+  handleSorting(idFromUrl);
+}
+
+async function handleSorting(idFromUrl) {
   document.querySelectorAll(".option-title").forEach((option) => {
     option.addEventListener("click", async () => {
       const dropdownTitle = document.querySelector(".dropdown-title")
       let selectedOption = dropdownTitle.textContent;
+      let sortedMedia;
 
       if (selectedOption === "Popularité") {
         sortedMedia = await sortMediaByPopularity(idFromUrl);
@@ -43,10 +39,8 @@ async function main() {
       displayMedia(sortedMedia);
     });
   });
-
-
-
 }
+
 
 function displayPhotographerInfo(photographer, totalLikes) {
   document.getElementById("name-container").innerHTML = photographer.name;
