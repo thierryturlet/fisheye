@@ -29,7 +29,8 @@ async function main() {
 
   document.querySelectorAll(".option-title").forEach((option) => {
     option.addEventListener("click", async () => {
-      let selectedOption = option.textContent;
+      const dropdownTitle = document.querySelector(".dropdown-title")
+      let selectedOption = dropdownTitle.textContent;
 
       if (selectedOption === "Popularité") {
         sortedMedia = await sortMediaByPopularity(idFromUrl);
