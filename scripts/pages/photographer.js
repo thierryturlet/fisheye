@@ -15,32 +15,13 @@ async function main() {
 
   displayDropdown();
 
-  let sortedMedia = await sortMediaByPopularity(idFromUrl);
+  let sortedMedia = sortMediaByPopularity(media);
   displayMedia(sortedMedia);
 
-  handleSorting(idFromUrl);
+  handleSorting(media);
+
+
 }
-
-async function handleSorting(idFromUrl) {
-  document.querySelectorAll(".option-title").forEach((option) => {
-    option.addEventListener("click", async () => {
-      const dropdownTitle = document.querySelector(".dropdown-title")
-      let selectedOption = dropdownTitle.textContent;
-      let sortedMedia;
-
-      if (selectedOption === "Popularité") {
-        sortedMedia = await sortMediaByPopularity(idFromUrl);
-      } else if (selectedOption === "Date") {
-        sortedMedia = await sortMediaByDate(idFromUrl);
-      } else if (selectedOption === "Titre") {
-        sortedMedia = await sortMediaByTitle(idFromUrl);
-      }
-
-      displayMedia(sortedMedia);
-    });
-  });
-}
-
 
 function displayPhotographerInfo(photographer, totalLikes) {
   document.getElementById("name-container").innerHTML = photographer.name;
@@ -217,11 +198,7 @@ function displayDropdown() {
       titledropdown.textContent = option.textContent;
       option.textContent = currentText;
 
-      closeDropdown();
-
-  
-
-
+      closeDropdown()
       
     });
 
@@ -254,6 +231,39 @@ function displayDropdown() {
   }
 }
 
+function handleSorting(media) {
+  document.querySelectorAll(".option-title").forEach((option) => {
+    option.addEventListener("click", () => {
+      const dropdownTitle = document.querySelector(".dropdown-title")
+      let selectedOption = dropdownTitle.textContent;
+      let sortedMedia;
 
+      if (selectedOption === "Popularité") {
+        sortedMedia = sortMediaByPopularity(media);
+      } else if (selectedOption === "Date") {
+        sortedMedia = sortMediaByDate(media);
+      } else if (selectedOption === "Titre") {
+        sortedMedia = sortMediaByTitle(media)
+      } else {
+        sortedMedia = media;
+      }
+
+      displayMedia(sortedMedia);
+    });
+  });
+}
+
+
+function sortMediaByPopularity(media) {
+  return [...media].sort((a, b) => b.likes - a.likes);
+}
+
+function sortMediaByDate(media) {
+  return [...media].sort((a, b) => new Date(b.date) - new Date(a.date));
+}
+
+function sortMediaByTitle(media) {
+  return [...media].sort((a, b) => a.title.localeCompare(b.title));
+}
 
 main();
