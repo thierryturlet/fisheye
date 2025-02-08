@@ -92,11 +92,12 @@ function displayPhotographerInfo(photographer, totalLikes) {
 }
 
 function displayMedia(media) {
+  const mediaContainer = document.getElementById("media-container");
+    mediaContainer.innerHTML ="";
   
   // Boucler sur chaque media
   media.forEach((mediaItem) => {
-    const mediaContainer = document.getElementById("media-container");
-    console.log(mediaContainer);
+    
 
     // Créer un élément pour chaque media
     const mediaElement = document.createElement("article");

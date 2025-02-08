@@ -69,10 +69,10 @@ async function getLikesPhotographer(id) {
 }
 
 async function sortMediaByPopularity(photographerId) {
+  
   const response = await fetch("http://127.0.0.1:5500/data/photographers.json");
   const data = await response.json();
   let mediaList = data.media;
-
   // Filtrer les médias du photographe spécifié
   mediaList = mediaList.filter((media) => media.photographerId === photographerId);
 
@@ -84,10 +84,10 @@ async function sortMediaByPopularity(photographerId) {
 }
 
 async function sortMediaByDate(photographerId) {
+
   const response = await fetch("http://127.0.0.1:5500/data/photographers.json");
   const data = await response.json();
   let mediaList = data.media;
-
   mediaList = mediaList.filter((media) => media.photographerId === photographerId);
   mediaList.sort((a, b) => new Date(b.date) - new Date(a.date)); // Trier par date décroissante
 
@@ -95,10 +95,10 @@ async function sortMediaByDate(photographerId) {
 }
 
 async function sortMediaByTitle(photographerId) {
+
   const response = await fetch("http://127.0.0.1:5500/data/photographers.json");
   const data = await response.json();
   let mediaList = data.media;
-
   mediaList = mediaList.filter((media) => media.photographerId === photographerId);
   mediaList.sort((a, b) => a.title.localeCompare(b.title)); // Trier par ordre alphabétique
 
