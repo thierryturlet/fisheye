@@ -263,4 +263,8 @@ function sortMediaByTitle(media) {
   return [...media].sort((a, b) => a.title.localeCompare(b.title));
 }
 
+// interaction pour la modale//
+
+
+
 main();
