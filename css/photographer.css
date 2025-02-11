@@ -74,3 +74,9 @@ form input {
     border: none;
     border-radius: 5px;
 }
+
+#message{
+    height: 239px;
+    width: 100%;
+    
+}

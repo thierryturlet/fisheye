@@ -1,6 +1,6 @@
 async function main() {
   const params = new URLSearchParams(window.location.search);
-  const idFromUrl =  parseInt(params.get("id")); // Convertir en nombre
+  const idFromUrl = parseInt(params.get("id")); // Convertir en nombre
   console.log(idFromUrl);
 
   let photographer = await getPhotographerById(idFromUrl);
@@ -19,8 +19,6 @@ async function main() {
   displayMedia(sortedMedia);
 
   handleSorting(media);
-
-
 }
 
 function displayPhotographerInfo(photographer, totalLikes) {
@@ -69,12 +67,10 @@ function displayPhotographerInfo(photographer, totalLikes) {
 
 function displayMedia(media) {
   const mediaContainer = document.getElementById("media-container");
-    mediaContainer.innerHTML ="";
-  
+  mediaContainer.innerHTML = "";
+
   // Boucler sur chaque media
   media.forEach((mediaItem) => {
-    
-
     // Créer un élément pour chaque media
     const mediaElement = document.createElement("article");
     console.log(mediaElement);
@@ -95,7 +91,7 @@ function displayMedia(media) {
 
       videoElement.src =
         "./photos/imagesetvideos/" + photographerFolder + "/" + mediaItem.video;
-      videoElement.controls = true; // Ajout des contrôles pour la vidéo
+      videoElement.controls = false; // Ajout des contrôles pour la vidéo
       mediaElement.appendChild(videoElement);
       console.log(videoElement);
     }
@@ -170,10 +166,11 @@ function displayDropdown() {
   const dropdownButton = document.createElement("div");
   dropdownButton.classList.add("title-dropdown");
 
-  // Élément qui affiche l'option sélectionnée
+  // Création du texte affiché sur le bouton
   const titledropdown = document.createElement("span");
   titledropdown.textContent = options[0]; // Par défaut "Popularité"
   titledropdown.classList.add("dropdown-title");
+  titledropdown.style.borderBottom = "none"; // Supprime la bordure sous Popularité
   dropdownButton.appendChild(titledropdown);
 
   // Icône de flèche
@@ -182,7 +179,7 @@ function displayDropdown() {
   dropdownButton.appendChild(fleche);
   dropdownContainer.appendChild(dropdownButton);
 
-  // Conteneur des options
+  // Création de la liste des options du menu
   const dropdownOptions = document.createElement("div");
   dropdownOptions.classList.add("dropdown-options", "close");
 
@@ -193,13 +190,12 @@ function displayDropdown() {
 
     // Ajout d'un événement de clic sur chaque option
     option.addEventListener("click", () => {
-      // Échange des valeurs
+      // Échange des valeurs permet d echanger entre les options de position
       let currentText = titledropdown.textContent;
       titledropdown.textContent = option.textContent;
       option.textContent = currentText;
 
-      closeDropdown()
-      
+      closeDropdown();
     });
 
     dropdownOptions.appendChild(option);
@@ -219,31 +215,33 @@ function displayDropdown() {
   }
 
   function openDropdown() {
-    fleche.classList.replace("fa-angle-up", "fa-chevron-down");
-    dropdownOptions.classList.replace("close", "open");
-    dropdownButton.style.borderBottom = '1px solid white';
+    fleche.classList.replace("fa-angle-up", "fa-chevron-down"); //Remplace la flèche vers le haut par une flèche vers le bas
+    dropdownOptions.classList.replace("close", "open"); //Ouvre le menu (close devient open)
+    dropdownButton.style.borderBottom = "1px solid white";
   }
 
   function closeDropdown() {
-    fleche.classList.replace("fa-chevron-down", "fa-angle-up");
-    dropdownOptions.classList.replace("open", "close");
-    dropdownButton.style.borderBottom = 'none';
+    fleche.classList.replace("fa-chevron-down", "fa-angle-up"); //Remet la flèche vers le haut
+    dropdownOptions.classList.replace("open", "close"); //Ferme le menu (open devient close).
+    dropdownButton.style.borderBottom = "none";
   }
 }
+
+// permet de trier une liste d’objets media en fonction de l'option sélectionnée.
 
 function handleSorting(media) {
   document.querySelectorAll(".option-title").forEach((option) => {
     option.addEventListener("click", () => {
-      const dropdownTitle = document.querySelector(".dropdown-title")
+      const dropdownTitle = document.querySelector(".dropdown-title");
       let selectedOption = dropdownTitle.textContent;
-      let sortedMedia;
+      let sortedMedia;// Déclaration de la variable
 
       if (selectedOption === "Popularité") {
         sortedMedia = sortMediaByPopularity(media);
       } else if (selectedOption === "Date") {
         sortedMedia = sortMediaByDate(media);
       } else if (selectedOption === "Titre") {
-        sortedMedia = sortMediaByTitle(media)
+        sortedMedia = sortMediaByTitle(media);
       } else {
         sortedMedia = media;
       }
@@ -252,7 +250,6 @@ function handleSorting(media) {
     });
   });
 }
-
 
 function sortMediaByPopularity(media) {
   return [...media].sort((a, b) => b.likes - a.likes);

@@ -296,6 +296,7 @@ button.contact-button:hover {
     
     padding-bottom: 5px;
     width: 95%;
+    
 }
 
 .option-title {
@@ -303,6 +304,8 @@ button.contact-button:hover {
     width: 100%;
     padding-bottom: 5px;
 }
+
+
 
 .filter-dropdown{
     display: flex;
@@ -315,3 +318,9 @@ button.contact-button:hover {
 .filter-dropdown h3{
     margin-left: 98px;
 }
+
+/*formulaire*/
+
+
+
+
