@@ -10,17 +10,23 @@ function closeModal() {
 
 //Ajout du nom du photographe
 
-async function getMediaPhotographer(id) {
-  const response = await fetch("http://127.0.0.1:5500/data/photographers.json");
-  const data = await response.json();
-  const formName = document.querySelector(".modal header h2 ");
-  const photographerName = document.createElement("span");
-  photographerName.textContent = photographer.name;
-  photographerName.style.display = "block";
-  formName.appendChild(photographerName);
-}
- 
+const nameToDisplay = "jhon lens"
 
+function namePhotographerModal(name){
+
+const formName = document.querySelector(".modal header h2");
+
+const photographerName = document.createElement("span");
+photographerName.textContent = name;
+
+photographerName.style.display = "block";
+formName.appendChild(photographerName);
+
+}
+namePhotographerModal(nameToDisplay)
+
+
+// gestion du formulaire
 
 const form = document.querySelector("form");
 console.log(form);
