@@ -10,7 +10,7 @@ function closeModal() {
 
 //Ajout du nom du photographe
 
-const nameToDisplay = "jhon lens"
+
 
 function namePhotographerModal(name){
 
@@ -23,7 +23,7 @@ photographerName.style.display = "block";
 formName.appendChild(photographerName);
 
 }
-namePhotographerModal(nameToDisplay)
+
 
 
 // gestion du formulaire

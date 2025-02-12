@@ -55,9 +55,16 @@
 }
 
 .modal header h2 {
-    font-size: 64px;
+    font-size: 50px;
     font-weight: normal;
     text-align: center;
+    padding-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal header h2 span{
+    margin-left:-34px;
 }
 
 form {

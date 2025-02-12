@@ -19,6 +19,9 @@ async function main() {
   displayMedia(sortedMedia);
 
   handleSorting(media);
+
+  const nameToDisplay = photographer.name;
+  namePhotographerModal(nameToDisplay)
 }
 
 function displayPhotographerInfo(photographer, totalLikes) {
