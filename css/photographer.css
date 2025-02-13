@@ -140,8 +140,8 @@ form input {
   }
   
   .modal-content img {
-    width: 100%;
-    height: auto;
+    width: 70%;
+    height: 70%;
   }
   
   .close-modal {
@@ -151,5 +151,12 @@ form input {
     font-size: 25px;
     cursor: pointer;
     color: black;
+  }
+  
+  #modal-title {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
   }
   

@@ -85,7 +85,7 @@ function displayMedia(media) {
 
       imageElement.addEventListener("click", () => {
         openModal();
-        loadImageInModal(imageElement.src);
+        loadImageInModal(imageElement.src,titleParagraph);
       });
 
       mediaElement.appendChild(imageElement);
@@ -300,10 +300,10 @@ function closedmodal(){
 
 closedmodal()
 
-function loadImageInModal(imageSrc) {
+function loadImageInModal(imageSrc,titleParagraph) {
   const modalImage = document.getElementById("modal-image"); // Sélectionne l'image dans la modale
-  const modal = document.getElementById("media-modal"); 
+  const modalTitle = document.getElementById("modal-title"); // Sélectionne l'élément titre
   modalImage.src = imageSrc; // Change la source de l'image
-  modal.style.display = "flex"; // Affiche la modale
+  modalTitle.textContent = titleParagraph.textContent; // Ajoute le titre sous l'image
 }
 main();
