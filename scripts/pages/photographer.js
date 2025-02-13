@@ -85,10 +85,16 @@ function displayMedia(media) {
 
       imageElement.addEventListener("click", () => {
         openModal();
+        loadImageInModal(imageElement.src);
       });
+
       mediaElement.appendChild(imageElement);
 
       mediaContainer.appendChild(mediaElement);
+      
+      
+     
+      
 
     } else if (mediaItem.video) {
       // Ajouter une vidéo
@@ -281,6 +287,23 @@ function openModal() {
   modal.style.display = "flex"; // Affiche la modale
 }
 
+function closedmodal(){
+  const imgModal = document.querySelector(".close-modal");//croix
+  const  modal = document.getElementById("media-modal");//modale complete
+  imgModal.addEventListener("click",() => {
+  modal.style.display = "none"
+  })
 
+    console.log("j ai fermé l'ímage")
 
+}
+
+closedmodal()
+
+function loadImageInModal(imageSrc) {
+  const modalImage = document.getElementById("modal-image"); // Sélectionne l'image dans la modale
+  const modal = document.getElementById("media-modal"); 
+  modalImage.src = imageSrc; // Change la source de l'image
+  modal.style.display = "flex"; // Affiche la modale
+}
 main();
