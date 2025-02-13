@@ -1,11 +1,11 @@
 async function main() {
   const params = new URLSearchParams(window.location.search);
   const idFromUrl = parseInt(params.get("id")); // Convertir en nombre
-  console.log(idFromUrl);
+  
 
   let photographer = await getPhotographerById(idFromUrl);
   let media = await getMediaPhotographer(idFromUrl);
-  console.log(media);
+  
 
   // Récupérer le total des likes
   const totalLikes = await getLikesPhotographer(idFromUrl);
@@ -21,7 +21,7 @@ async function main() {
   handleSorting(media);
 
   const nameToDisplay = photographer.name;
-  namePhotographerModal(nameToDisplay)
+  namePhotographerModal(nameToDisplay);
 }
 
 function displayPhotographerInfo(photographer, totalLikes) {
@@ -51,15 +51,9 @@ function displayPhotographerInfo(photographer, totalLikes) {
   taglineContainer.innerHTML = photographer.tagline;
   taglineContainer.classList.add("photographer-tagline");
 
-  console.log(photographer.name);
-  console.log(photographer.city, photographer.country);
-  console.log(
-    `./photos/Sample photos/Photographers ID Photos/${photographer.portrait}`
-  );
-  console.log(photographer.tagline);
-  console.log(photographer.portrait);
 
-  //Ajout de la banniere like et prix joiurnalier
+
+  //Ajout de la banniere like et prix journalier
 
   const likesElement = document.querySelector(".totalikes");
   likesElement.textContent = totalLikes;
@@ -76,7 +70,7 @@ function displayMedia(media) {
   media.forEach((mediaItem) => {
     // Créer un élément pour chaque media
     const mediaElement = document.createElement("article");
-    console.log(mediaElement);
+ 
 
     if (mediaItem.image) {
       // Ajouter une image
@@ -86,7 +80,16 @@ function displayMedia(media) {
       imageElement.src =
         "./photos/imagesetvideos/" + photographerFolder + "/" + mediaItem.image;
       mediaElement.appendChild(imageElement);
-      console.log(imageElement);
+
+      // ouvre la modale en cliquant sur l'ímage
+
+      imageElement.addEventListener("click", () => {
+        openModal();
+      });
+      mediaElement.appendChild(imageElement);
+
+      mediaContainer.appendChild(mediaElement);
+
     } else if (mediaItem.video) {
       // Ajouter une vidéo
       const videoElement = document.createElement("video");
@@ -96,7 +99,7 @@ function displayMedia(media) {
         "./photos/imagesetvideos/" + photographerFolder + "/" + mediaItem.video;
       videoElement.controls = false; // Ajout des contrôles pour la vidéo
       mediaElement.appendChild(videoElement);
-      console.log(videoElement);
+     
     }
 
     // Créer une div pour le titre et les likes
@@ -154,7 +157,7 @@ function displayMedia(media) {
 
     // Ajouter la div au mediaElement
     mediaElement.appendChild(divLikeContainer);
-    console.log(divLikeContainer);
+   
 
     // Ajouter l'élément média au conteneur principal
     mediaContainer.appendChild(mediaElement);
@@ -237,7 +240,7 @@ function handleSorting(media) {
     option.addEventListener("click", () => {
       const dropdownTitle = document.querySelector(".dropdown-title");
       let selectedOption = dropdownTitle.textContent;
-      let sortedMedia;// Déclaration de la variable
+      let sortedMedia; // Déclaration de la variable
 
       if (selectedOption === "Popularité") {
         sortedMedia = sortMediaByPopularity(media);
@@ -254,6 +257,8 @@ function handleSorting(media) {
   });
 }
 
+// trie en fonction des dates nbr de likes et ordre alphabetique
+
 function sortMediaByPopularity(media) {
   return [...media].sort((a, b) => b.likes - a.likes);
 }
@@ -266,7 +271,15 @@ function sortMediaByTitle(media) {
   return [...media].sort((a, b) => a.title.localeCompare(b.title));
 }
 
-// interaction pour la modale//
+// ouverture de la modale a image
+
+function openModal() {
+  const modal = document.getElementById("media-modal");
+  modal.classList.add ("modal-overlay")
+
+  
+  modal.style.display = "flex"; // Affiche la modale
+}
 
 
 
