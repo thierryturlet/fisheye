@@ -18,7 +18,7 @@ async function main() {
   let sortedMedia = sortMediaByPopularity(media);
   displayMedia(sortedMedia);
 
-  handleSorting(media);
+  handleSorting(media);  
 
   const nameToDisplay = photographer.name;
   namePhotographerModal(nameToDisplay);
@@ -305,5 +305,6 @@ function loadImageInModal(imageSrc,titleParagraph) {
   const modalTitle = document.getElementById("modal-title"); // Sélectionne l'élément titre
   modalImage.src = imageSrc; // Change la source de l'image
   modalTitle.textContent = titleParagraph.textContent; // Ajoute le titre sous l'image
+  modalTitle.className = titleParagraph.className;
 }
 main();
