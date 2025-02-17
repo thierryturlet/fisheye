@@ -62,12 +62,20 @@ function displayPhotographerInfo(photographer, totalLikes) {
   priceElement.textContent = `${photographer.price} €/jour`;
 }
 
+
+
+
+
 function displayMedia(media) {
+
+
+  currentMedia = media; // Met à jour le tableau global avec les médias du photographe
+  
   const mediaContainer = document.getElementById("media-container");
   mediaContainer.innerHTML = "";
 
   // Boucler sur chaque media
-  media.forEach((mediaItem) => {
+  media.forEach((mediaItem,index) => {
     // Créer un élément pour chaque media
     const mediaElement = document.createElement("article");
  
@@ -84,7 +92,7 @@ function displayMedia(media) {
       // ouvre la modale en cliquant sur l'ímage
 
       imageElement.addEventListener("click", () => {
-        openModal();
+        openModal(index);
         loadImageInModal(imageElement.src,titleParagraph);
       });
 
@@ -279,7 +287,8 @@ function sortMediaByTitle(media) {
 
 // ouverture de la modale a image
 
-function openModal() {
+function openModal(index) {
+  currentIndex = index; // Met à jour l’index de l’image actuelle
   const modal = document.getElementById("media-modal");
   modal.classList.add ("modal-overlay")
 
@@ -307,4 +316,43 @@ function loadImageInModal(imageSrc,titleParagraph) {
   modalTitle.textContent = titleParagraph.textContent; // Ajoute le titre sous l'image
   modalTitle.className = titleParagraph.className;
 }
+
+
+//pour faire defiler les images
+
+const modal = document.getElementById("media-modal");
+const modalImage = document.getElementById("modal-image");
+const modalTitle = document.getElementById("modal-title");
+const closeModalBtn = document.querySelector(".close-modal");
+const leftArrow = document.querySelector(".left-arrow");
+const rightArrow = document.querySelector(".right-arrow");
+
+
+//met à jour l’image et le titre affichés dans la modale
+
+function updateModal() {
+  if (currentMedia.length > 0) {
+      const mediaItem = currentMedia[currentIndex];
+
+      if (mediaItem.image) {
+          modalImage.src = `./photos/imagesetvideos/${mediaItem.photographerId}/${mediaItem.image}`;
+      }
+      modalTitle.textContent = mediaItem.title;
+  }
+}
+
+leftArrow.addEventListener("click", () => {
+  currentIndex = (currentIndex - 1 + currentMedia.length) % currentMedia.length;
+  console.log("Image précédente - Index actuel :", currentIndex);
+  updateModal();
+});
+
+rightArrow.addEventListener("click", () => {
+  currentIndex = (currentIndex + 1) % currentMedia.length;
+  console.log("Image suivante - Index actuel :", currentIndex);
+  updateModal();
+});
+
+
+
 main();

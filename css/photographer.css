@@ -137,6 +137,9 @@ form input {
     border-radius: 10px;
     max-width: 80%;
     max-height: 80%;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
   }
   
   .modal-content img {
@@ -145,18 +148,22 @@ form input {
   }
   
   .close-modal {
-    position: fixed;
-    top: 69px;
-    right: 27%;
-    z-index: 12;
-    font-size: 99px;
+    position: absolute; /* Position absolue par rapport à .modal-content */
+    top: 0px; /* Ajuste la position verticale */
+    right: 150px; /* Colle la croix légèrement à droite */
+    font-size: 70px;
     cursor: pointer;
     color: #901C1C;
+    z-index: 10;
   }
-  
   #modal-title {
     color: #901C1C;
     font-size: 20px;
     font-weight: bold;
+    margin-left: 93px;
   }
   
+  .slideshow{
+    display: flex;
+    align-items: center;
+  }
