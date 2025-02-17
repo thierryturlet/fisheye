@@ -283,13 +283,25 @@ function sortMediaByDate(media) {
 
 function sortMediaByTitle(media) {
   return [...media].sort((a, b) => a.title.localeCompare(b.title));
+
 }
+
+// Elements liés a la modal d'ímages
+
+const modal = document.getElementById("media-modal");
+const modalImage = document.getElementById("modal-image");
+const modalTitle = document.getElementById("modal-title");
+const closeModalBtn = document.querySelector(".close-modal");
+const leftArrow = document.querySelector(".left-arrow");
+const rightArrow = document.querySelector(".right-arrow");
+
+
 
 // ouverture de la modale a image
 
 function openModal(index) {
   currentIndex = index; // Met à jour l’index de l’image actuelle
-  const modal = document.getElementById("media-modal");
+  
   modal.classList.add ("modal-overlay")
 
   
@@ -297,9 +309,8 @@ function openModal(index) {
 }
 
 function closedmodal(){
-  const imgModal = document.querySelector(".close-modal");//croix
-  const  modal = document.getElementById("media-modal");//modale complete
-  imgModal.addEventListener("click",() => {
+ 
+ closeModalBtn.addEventListener("click",() => {
   modal.style.display = "none"
   })
 
@@ -310,22 +321,13 @@ function closedmodal(){
 closedmodal()
 
 function loadImageInModal(imageSrc,titleParagraph) {
-  const modalImage = document.getElementById("modal-image"); // Sélectionne l'image dans la modale
-  const modalTitle = document.getElementById("modal-title"); // Sélectionne l'élément titre
+ 
   modalImage.src = imageSrc; // Change la source de l'image
   modalTitle.textContent = titleParagraph.textContent; // Ajoute le titre sous l'image
   modalTitle.className = titleParagraph.className;
 }
 
 
-//pour faire defiler les images
-
-const modal = document.getElementById("media-modal");
-const modalImage = document.getElementById("modal-image");
-const modalTitle = document.getElementById("modal-title");
-const closeModalBtn = document.querySelector(".close-modal");
-const leftArrow = document.querySelector(".left-arrow");
-const rightArrow = document.querySelector(".right-arrow");
 
 
 //met à jour l’image et le titre affichés dans la modale

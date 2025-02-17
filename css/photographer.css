@@ -143,14 +143,15 @@ form input {
   }
   
   .modal-content img {
-    width: 70%;
-    height: 70%;
+    width: 80vw;
+    height:80vh;
+    object-fit: cover;
   }
   
   .close-modal {
     position: absolute; /* Position absolue par rapport à .modal-content */
     top: 0px; /* Ajuste la position verticale */
-    right: 150px; /* Colle la croix légèrement à droite */
+    right: 15px; /* Colle la croix légèrement à droite */
     font-size: 70px;
     cursor: pointer;
     color: #901C1C;
@@ -160,7 +161,7 @@ form input {
     color: #901C1C;
     font-size: 20px;
     font-weight: bold;
-    margin-left: 93px;
+    margin-left: 82px;
   }
   
   .slideshow{
