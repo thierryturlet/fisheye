@@ -22,6 +22,7 @@ async function main() {
 
   const nameToDisplay = photographer.name;
   namePhotographerModal(nameToDisplay);
+ 
 }
 
 function displayPhotographerInfo(photographer, totalLikes) {
@@ -333,27 +334,29 @@ function loadImageInModal(imageSrc,titleParagraph) {
 //met à jour l’image et le titre affichés dans la modale
 
 function updateModal() {
-  if (currentMedia.length > 0) {
+  
       const mediaItem = currentMedia[currentIndex];
 
       if (mediaItem.image) {
           modalImage.src = `./photos/imagesetvideos/${mediaItem.photographerId}/${mediaItem.image}`;
       }
       modalTitle.textContent = mediaItem.title;
-  }
+  
 }
 
-leftArrow.addEventListener("click", () => {
-  currentIndex = (currentIndex - 1 + currentMedia.length) % currentMedia.length;
-  console.log("Image précédente - Index actuel :", currentIndex);
-  updateModal();
-});
+  //Permet de faire defiler les images au click
 
-rightArrow.addEventListener("click", () => {
-  currentIndex = (currentIndex + 1) % currentMedia.length;
-  console.log("Image suivante - Index actuel :", currentIndex);
-  updateModal();
-});
+  leftArrow.addEventListener("click", () => {
+    currentIndex = (currentIndex - 1 + currentMedia.length) % currentMedia.length;
+    console.log("Image précédente - Index actuel :", currentIndex);
+    updateModal();
+  });
+  
+  rightArrow.addEventListener("click", () => {
+    currentIndex = (currentIndex + 1) % currentMedia.length;
+    console.log("Image suivante - Index actuel :", currentIndex);
+    updateModal();
+  });
 
 
 

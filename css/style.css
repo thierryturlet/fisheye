@@ -61,8 +61,8 @@ h1 {
 }
 
 #photographers img {
-    width: 300px; /* Largeur en pixels */
-    height: 300px; /* Hauteur en pixels */
+    width: 200px; /* Largeur en pixels */
+    height: 200px; /* Hauteur en pixels */
     border-radius: 50%; /* Optionnel : arrondir les coins */
 }
 

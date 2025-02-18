@@ -10,21 +10,15 @@ function closeModal() {
 
 //Ajout du nom du photographe
 
+function namePhotographerModal(name) {
+  const formName = document.querySelector(".modal header h2");
 
+  const photographerName = document.createElement("span");
+  photographerName.textContent = name;
 
-function namePhotographerModal(name){
-
-const formName = document.querySelector(".modal header h2");
-
-const photographerName = document.createElement("span");
-photographerName.textContent = name;
-
-photographerName.style.display = "block";
-formName.appendChild(photographerName);
-
+  photographerName.style.display = "block";
+  formName.appendChild(photographerName);
 }
-
-
 
 // gestion du formulaire
 
