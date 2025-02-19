@@ -143,8 +143,8 @@ form input {
   }
   
   .modal-content img {
-    width: 80vw;
-    height:80vh;
+    width: 72vw;
+    height:72vh;
     object-fit: cover;
   }
   
@@ -161,10 +161,18 @@ form input {
     color: #901C1C;
     font-size: 20px;
     font-weight: bold;
-    margin-left: 82px;
+    margin-left: 60px;
   }
   
   .slideshow{
     display: flex;
     align-items: center;
   }
+
+  #modal-media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 80vw; /* Adapter à la taille de la modale */
+    max-height: 80vh;
+}

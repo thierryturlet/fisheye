@@ -289,12 +289,24 @@ function sortMediaByTitle(media) {
 
 // Elements liés a la modal d'ímages
 
+
+
+
 const modal = document.getElementById("media-modal");
-const modalImage = document.getElementById("modal-image");
+
 const modalTitle = document.getElementById("modal-title");
 const closeModalBtn = document.querySelector(".close-modal");
 const leftArrow = document.querySelector(".left-arrow");
 const rightArrow = document.querySelector(".right-arrow");
+
+const modalMedia = document.getElementById("modal-media");
+const modalImage = document.createElement("img");
+modalImage.id = "modal-image";
+modalImage.alt = "Apercu de l'ímage";
+modalMedia.appendChild(modalImage);
+
+
+
 
 
 
@@ -302,22 +314,12 @@ const rightArrow = document.querySelector(".right-arrow");
 
 function openModal(index) {
   currentIndex = index; // Met à jour l’index de l’image actuelle
-  const mediaItem = currentMedia[currentIndex];
+  
+  modal.classList.add ("modal-overlay")
 
-  // Vérifie si c'est une image ou une vidéo et met à jour la modale
-  if (mediaItem.image) {
-    modalImage.src = `./photos/imagesetvideos/${mediaItem.photographerId}/${mediaItem.image}`;
-    modalImage.style.display = "block"; // Afficher l'image
-  } else if (mediaItem.video) {
-    modalImage.src = ""; // Vider l'image
-    modalImage.style.display = "none"; // Cacher l'image
-  }
-
-  modalTitle.textContent = mediaItem.title;
-
+  
   modal.style.display = "flex"; // Affiche la modale
 }
-
 
 function closedmodal(){
  
@@ -344,30 +346,15 @@ function loadImageInModal(imageSrc,titleParagraph) {
 //met à jour l’image et le titre affichés dans la modale
 
 function updateModal() {
-  const mediaItem = currentMedia[currentIndex];
+  
+      const mediaItem = currentMedia[currentIndex];
 
-  if (mediaItem.image) {
-    modalImage.src = `./photos/imagesetvideos/${mediaItem.photographerId}/${mediaItem.image}`;
-    modalImage.style.display = "block";
-  } else {
-    modalImage.style.display = "none";
-  }
-
-  modalTitle.textContent = mediaItem.title;
+      if (mediaItem.image) {
+          modalImage.src = `./photos/imagesetvideos/${mediaItem.photographerId}/${mediaItem.image}`;
+      }
+      modalTitle.textContent = mediaItem.title;
+  
 }
-
-// Flèche gauche (image précédente)
-leftArrow.addEventListener("click", () => {
-  currentIndex = (currentIndex - 1 + currentMedia.length) % currentMedia.length;
-  updateModal();
-});
-
-// Flèche droite (image suivante)
-rightArrow.addEventListener("click", () => {
-  currentIndex = (currentIndex + 1) % currentMedia.length;
-  updateModal();
-});
-
 
   //Permet de faire defiler les images au click
 
