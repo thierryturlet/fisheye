@@ -299,21 +299,25 @@ const closeModalBtn = document.querySelector(".close-modal");
 const leftArrow = document.querySelector(".left-arrow");
 const rightArrow = document.querySelector(".right-arrow");
 
+function createImageElement(){
 const modalMedia = document.getElementById("modal-media");
+modalMedia.innerHTML=""; // Nettoie le conteneur avant d'ajouter une nouvelle image
 const modalImage = document.createElement("img");
 modalImage.id = "modal-image";
 modalImage.alt = "Apercu de l'ímage";
 modalMedia.appendChild(modalImage);
+}
 
 
 
 
 
-
-// ouverture de la modale a image
+// Fonction pour ouvrir la modale avec une image sélectionnée
 
 function openModal(index) {
   currentIndex = index; // Met à jour l’index de l’image actuelle
+  createImageElement(); // Crée une nouvelle image dans la modale
+  updateModal(); // Charge l’image correspondante
   
   modal.classList.add ("modal-overlay")
 
@@ -334,7 +338,8 @@ function closedmodal(){
 closedmodal()
 
 function loadImageInModal(imageSrc,titleParagraph) {
- 
+  createImageElement();
+  const modalImage = document.getElementById("modal-media");
   modalImage.src = imageSrc; // Change la source de l'image
   modalTitle.textContent = titleParagraph.textContent; // Ajoute le titre sous l'image
   modalTitle.className = titleParagraph.className;
@@ -346,7 +351,7 @@ function loadImageInModal(imageSrc,titleParagraph) {
 //met à jour l’image et le titre affichés dans la modale
 
 function updateModal() {
-  
+      const modalImage = document.getElementById("modal-media");
       const mediaItem = currentMedia[currentIndex];
 
       if (mediaItem.image) {
