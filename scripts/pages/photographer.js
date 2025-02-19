@@ -299,25 +299,40 @@ const closeModalBtn = document.querySelector(".close-modal");
 const leftArrow = document.querySelector(".left-arrow");
 const rightArrow = document.querySelector(".right-arrow");
 
+
+
 function createImageElement(){
+
 const modalMedia = document.getElementById("modal-media");
-modalMedia.innerHTML=""; // Nettoie le conteneur avant d'ajouter une nouvelle image
+modalMedia.innerHTML="";
+
 const modalImage = document.createElement("img");
 modalImage.id = "modal-image";
 modalImage.alt = "Apercu de l'ímage";
+
 modalMedia.appendChild(modalImage);
+
 }
 
 
+function createVideoElement(){
+const modalMedia = document.getElementById("modal-media");
+modalMedia.innerHTML="";
+
+const modalVideo = document.createElement("video");
+modalVideo.id = "modal-video";
+modalVideo.alt = "Apercu de la video";
+modalVideo.controls = true; 
+
+modalMedia.appendChild(modalVideo);
+
+}
 
 
-
-// Fonction pour ouvrir la modale avec une image sélectionnée
+// ouverture de la modale a image
 
 function openModal(index) {
   currentIndex = index; // Met à jour l’index de l’image actuelle
-  createImageElement(); // Crée une nouvelle image dans la modale
-  updateModal(); // Charge l’image correspondante
   
   modal.classList.add ("modal-overlay")
 
@@ -339,28 +354,40 @@ closedmodal()
 
 function loadImageInModal(imageSrc,titleParagraph) {
   createImageElement();
-  const modalImage = document.getElementById("modal-media");
+ 
+  const modalImage = document.getElementById("modal-image");
   modalImage.src = imageSrc; // Change la source de l'image
   modalTitle.textContent = titleParagraph.textContent; // Ajoute le titre sous l'image
   modalTitle.className = titleParagraph.className;
 }
 
+function loadVideoModal (videoSrc,titleParagraph){
+  createVideoElement();
+
+  const modalVideo = document.createElement("video");
+  modalVideo.src = videoSrc;
+  modalTitle.textContent = titleParagraph.textContent; 
+  modalTitle.className = titleParagraph.className;
+}
 
 
 
 //met à jour l’image et le titre affichés dans la modale
 
 function updateModal() {
-      const modalImage = document.getElementById("modal-media");
-      const mediaItem = currentMedia[currentIndex];
+  const mediaItem = currentMedia[currentIndex];
+  const imageSrc = `./photos/imagesetvideos/${mediaItem.photographerId}/${mediaItem.image}`;
+  const videoSrc = `./photos/imagesetvideos/${mediaItem.photographerId}/${mediaItem.video}`;
 
-      if (mediaItem.image) {
-          modalImage.src = `./photos/imagesetvideos/${mediaItem.photographerId}/${mediaItem.image}`;
-      }
-      modalTitle.textContent = mediaItem.title;
-  
+  if (mediaItem.image) {
+      loadImageInModal(imageSrc, mediaItem.title)
+  }
+  if (mediaItem.video) {
+    loadVideoInModal(videoSrc, mediaItem.title)
+  }
+
+
 }
-
   //Permet de faire defiler les images au click
 
   leftArrow.addEventListener("click", () => {
