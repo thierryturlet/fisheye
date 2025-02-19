@@ -82,7 +82,7 @@ function displayMedia(media) {
 
       imageElement.addEventListener("click", () => {
         openModal(index);
-        loadImageInModal(imageElement.src, titleParagraph);
+        loadImageInModal(imageElement.src, titleParagraph.textContent);
       });
 
       mediaElement.appendChild(imageElement);
@@ -324,7 +324,7 @@ function loadImageInModal(imageSrc, titleParagraph) {
 
   const modalImage = document.getElementById("modal-image");
   modalImage.src = imageSrc; // Change la source de l'image
-  modalTitle.textContent = titleParagraph.textContent; // Ajoute le titre sous l'image
+  modalTitle.textContent = titleParagraph; // Ajoute le titre sous l'image
   modalTitle.className = titleParagraph.className;
 }
 
@@ -333,7 +333,7 @@ function loadVideoModal(videoSrc, titleParagraph) {
 
   const modalVideo = document.getElementById("modal-video");
   modalVideo.src = videoSrc;
-  modalTitle.textContent = titleParagraph.textContent;
+  modalTitle.textContent = titleParagraph;
   modalTitle.className = titleParagraph.className;
 }
 
@@ -350,8 +350,8 @@ function updateModal() {
   if (mediaItem.video) {
     loadVideoModal(videoSrc, mediaItem.title);
   }
-  modalTitle.textContent = titleParagraph.textContent;
-  modalTitle.className = titleParagraph.className;
+
+  
 }
 //Permet de faire defiler les images au click
 
