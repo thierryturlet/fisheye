@@ -1,11 +1,9 @@
 async function main() {
   const params = new URLSearchParams(window.location.search);
   const idFromUrl = parseInt(params.get("id")); // Convertir en nombre
-  
 
   let photographer = await getPhotographerById(idFromUrl);
   let media = await getMediaPhotographer(idFromUrl);
-  
 
   // Récupérer le total des likes
   const totalLikes = await getLikesPhotographer(idFromUrl);
@@ -18,11 +16,10 @@ async function main() {
   let sortedMedia = sortMediaByPopularity(media);
   displayMedia(sortedMedia);
 
-  handleSorting(media);  
+  handleSorting(media);
 
   const nameToDisplay = photographer.name;
   namePhotographerModal(nameToDisplay);
- 
 }
 
 function displayPhotographerInfo(photographer, totalLikes) {
@@ -52,8 +49,6 @@ function displayPhotographerInfo(photographer, totalLikes) {
   taglineContainer.innerHTML = photographer.tagline;
   taglineContainer.classList.add("photographer-tagline");
 
-
-
   //Ajout de la banniere like et prix journalier
 
   const likesElement = document.querySelector(".totalikes");
@@ -63,23 +58,16 @@ function displayPhotographerInfo(photographer, totalLikes) {
   priceElement.textContent = `${photographer.price} €/jour`;
 }
 
-
-
-
-
 function displayMedia(media) {
-
-
   currentMedia = media; // Met à jour le tableau global avec les médias du photographe
-  
+
   const mediaContainer = document.getElementById("media-container");
   mediaContainer.innerHTML = "";
 
   // Boucler sur chaque media
-  media.forEach((mediaItem,index) => {
+  media.forEach((mediaItem, index) => {
     // Créer un élément pour chaque media
     const mediaElement = document.createElement("article");
- 
 
     if (mediaItem.image) {
       // Ajouter une image
@@ -94,17 +82,12 @@ function displayMedia(media) {
 
       imageElement.addEventListener("click", () => {
         openModal(index);
-        loadImageInModal(imageElement.src,titleParagraph);
+        loadImageInModal(imageElement.src, titleParagraph);
       });
 
       mediaElement.appendChild(imageElement);
 
       mediaContainer.appendChild(mediaElement);
-      
-      
-     
-      
-
     } else if (mediaItem.video) {
       // Ajouter une vidéo
       const videoElement = document.createElement("video");
@@ -114,7 +97,6 @@ function displayMedia(media) {
         "./photos/imagesetvideos/" + photographerFolder + "/" + mediaItem.video;
       videoElement.controls = true; // Ajout des contrôles pour la vidéo
       mediaElement.appendChild(videoElement);
-     
     }
 
     // Créer une div pour le titre et les likes
@@ -172,7 +154,6 @@ function displayMedia(media) {
 
     // Ajouter la div au mediaElement
     mediaElement.appendChild(divLikeContainer);
-   
 
     // Ajouter l'élément média au conteneur principal
     mediaContainer.appendChild(mediaElement);
@@ -284,13 +265,9 @@ function sortMediaByDate(media) {
 
 function sortMediaByTitle(media) {
   return [...media].sort((a, b) => a.title.localeCompare(b.title));
-
 }
 
 // Elements liés a la modal d'ímages
-
-
-
 
 const modal = document.getElementById("media-modal");
 
@@ -299,78 +276,66 @@ const closeModalBtn = document.querySelector(".close-modal");
 const leftArrow = document.querySelector(".left-arrow");
 const rightArrow = document.querySelector(".right-arrow");
 
+function createImageElement() {
+  const modalMedia = document.getElementById("modal-media");
+  modalMedia.innerHTML = "";
 
+  const modalImage = document.createElement("img");
+  modalImage.id = "modal-image";
+  modalImage.alt = "Apercu de l'ímage";
 
-function createImageElement(){
-
-const modalMedia = document.getElementById("modal-media");
-modalMedia.innerHTML="";
-
-const modalImage = document.createElement("img");
-modalImage.id = "modal-image";
-modalImage.alt = "Apercu de l'ímage";
-
-modalMedia.appendChild(modalImage);
-
+  modalMedia.appendChild(modalImage);
 }
 
+function createVideoElement() {
+  const modalMedia = document.getElementById("modal-media");
+  modalMedia.innerHTML = "";
 
-function createVideoElement(){
-const modalMedia = document.getElementById("modal-media");
-modalMedia.innerHTML="";
+  const modalVideo = document.createElement("video");
+  modalVideo.id = "modal-video";
+  modalVideo.alt = "Apercu de la video";
+  modalVideo.controls = true;
 
-const modalVideo = document.createElement("video");
-modalVideo.id = "modal-video";
-modalVideo.alt = "Apercu de la video";
-modalVideo.controls = true; 
-
-modalMedia.appendChild(modalVideo);
-
+  modalMedia.appendChild(modalVideo);
 }
-
 
 // ouverture de la modale a image
 
 function openModal(index) {
   currentIndex = index; // Met à jour l’index de l’image actuelle
-  
-  modal.classList.add ("modal-overlay")
 
-  
+  modal.classList.add("modal-overlay");
+
   modal.style.display = "flex"; // Affiche la modale
 }
 
-function closedmodal(){
- 
- closeModalBtn.addEventListener("click",() => {
-  modal.style.display = "none"
-  })
+function closedmodal() {
+  closeModalBtn.addEventListener("click", () => {
+    modal.style.display = "none";
+  });
 
-    console.log("j ai fermé l'ímage")
-
+  console.log("j ai fermé l'ímage");
 }
 
-closedmodal()
+closedmodal();
 
-function loadImageInModal(imageSrc,titleParagraph) {
+function loadImageInModal(imageSrc, titleParagraph) {
   createImageElement();
- 
+
   const modalImage = document.getElementById("modal-image");
   modalImage.src = imageSrc; // Change la source de l'image
   modalTitle.textContent = titleParagraph.textContent; // Ajoute le titre sous l'image
   modalTitle.className = titleParagraph.className;
 }
 
-function loadVideoModal (videoSrc,titleParagraph){
+function loadVideoModal(videoSrc, titleParagraph) {
   createVideoElement();
 
-  const modalVideo = document.createElement("video");
+  const modalVideo = document.getElementById("modal-video");
   modalVideo.src = videoSrc;
-  modalTitle.textContent = titleParagraph.textContent; 
+  modalTitle.textContent = titleParagraph.textContent;
   modalTitle.className = titleParagraph.className;
 }
-
-
 
 //met à jour l’image et le titre affichés dans la modale
 
@@ -380,28 +345,26 @@ function updateModal() {
   const videoSrc = `./photos/imagesetvideos/${mediaItem.photographerId}/${mediaItem.video}`;
 
   if (mediaItem.image) {
-      loadImageInModal(imageSrc, mediaItem.title)
+    loadImageInModal(imageSrc, mediaItem.title);
   }
   if (mediaItem.video) {
-    loadVideoInModal(videoSrc, mediaItem.title)
+    loadVideoModal(videoSrc, mediaItem.title);
   }
-
-
+  modalTitle.textContent = titleParagraph.textContent;
+  modalTitle.className = titleParagraph.className;
 }
-  //Permet de faire defiler les images au click
+//Permet de faire defiler les images au click
 
-  leftArrow.addEventListener("click", () => {
-    currentIndex = (currentIndex - 1 + currentMedia.length) % currentMedia.length;
-    console.log("Image précédente - Index actuel :", currentIndex);
-    updateModal();
-  });
-  
-  rightArrow.addEventListener("click", () => {
-    currentIndex = (currentIndex + 1) % currentMedia.length;
-    console.log("Image suivante - Index actuel :", currentIndex);
-    updateModal();
-  });
+leftArrow.addEventListener("click", () => {
+  currentIndex = (currentIndex - 1 + currentMedia.length) % currentMedia.length;
+  console.log("Image précédente - Index actuel :", currentIndex);
+  updateModal();
+});
 
-
+rightArrow.addEventListener("click", () => {
+  currentIndex = (currentIndex + 1) % currentMedia.length;
+  console.log("Image suivante - Index actuel :", currentIndex);
+  updateModal();
+});
 
 main();

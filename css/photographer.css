@@ -142,7 +142,7 @@ form input {
     position: relative;
   }
   
-  .modal-content img {
+  .modal-content img, .modal-content video{
     width: 72vw;
     height:72vh;
     object-fit: cover;
