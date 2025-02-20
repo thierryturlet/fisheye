@@ -326,6 +326,8 @@ function loadImageInModal(imageSrc, titleParagraph) {
   modalImage.src = imageSrc; // Change la source de l'image
   modalTitle.textContent = titleParagraph; // Ajoute le titre sous l'image
   modalTitle.className = titleParagraph.className;
+  modalTitle.setAttribute('tabindex', '-1');
+  modalTitle.focus()
 }
 
 function loadVideoModal(videoSrc, titleParagraph) {
