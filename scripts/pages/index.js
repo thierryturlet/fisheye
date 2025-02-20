@@ -17,6 +17,7 @@ function displayPhotographers(photographers) {
     // Ajouter une image
     const imageElement = document.createElement("img");
     imageElement.src = `./photos/Sample photos/Photographers ID Photos/${photographer.portrait}`;
+    imageElement.alt = "";
     linkElement.appendChild(imageElement);
 
     // Ajouter le nom du photographe

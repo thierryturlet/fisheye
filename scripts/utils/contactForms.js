@@ -47,3 +47,9 @@ function closeModal() {
   let modal = document.getElementById("contact_modal");
   modal.style.display = "none";
 }
+// Fermer la modale avec la touche Échap
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    closeModal();
+  }
+});
