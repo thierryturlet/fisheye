@@ -4,14 +4,17 @@ function displayPhotographers(photographers) {
   const photographersContainer = document.getElementById("photographers");
 
   // Boucler sur chaque photographe
-  photographers.forEach((photographer) => {
+  photographers.forEach((photographer,index) => {
     // Créer un élément pour chaque photographe
     const photographerElement = document.createElement("article");
     photographerElement.classList.add("photographer");
 
+    const uniqueId = `photographer-name-${index}`;
+
     // Ajout du lien
     const linkElement = document.createElement("a");
     linkElement.href = "photographer.html";
+    linkElement.setAttribute('aria-labelledby',uniqueId);
     photographerElement.appendChild(linkElement);
 
     // Ajouter une image
@@ -23,6 +26,7 @@ function displayPhotographers(photographers) {
     // Ajouter le nom du photographe
     const nameElement = document.createElement("h2");
     nameElement.textContent = photographer.name;
+    nameElement.id = uniqueId;
     linkElement.appendChild(nameElement);
 
     // Ajout des villes et pays sur la même ligne

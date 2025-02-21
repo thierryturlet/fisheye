@@ -72,6 +72,9 @@ function displayMedia(media) {
     if (mediaItem.image) {
       // Ajouter une image
       const imageElement = document.createElement("img");
+
+      //accessibilite des images avec le clavier
+      imageElement.tabIndex = 0;
       const photographerFolder = mediaItem.photographerId;
 
       imageElement.src =
@@ -83,6 +86,15 @@ function displayMedia(media) {
       imageElement.addEventListener("click", () => {
         openModal(index);
         loadImageInModal(imageElement.src, titleParagraph.textContent);
+      });
+
+      // Ouvre la modale en appuyant sur "Entrée"
+
+      imageElement.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+          openModal(index);
+          loadImageInModal(imageElement.src, titleParagraph.textContent);
+        }
       });
 
       mediaElement.appendChild(imageElement);
@@ -303,15 +315,73 @@ function createVideoElement() {
 
 function openModal(index) {
   currentIndex = index; // Met à jour l’index de l’image actuelle
-
   modal.classList.add("modal-overlay");
-
   modal.style.display = "flex"; // Affiche la modale
+
+  
+
+  updateModal(); // Charge l'image ou la vidéo AVANT d'ajouter les attributs
+
+  // Récupère les éléments après l'affichage
+  const modalImage = document.getElementById("modal-image");
+  const modalVideo = document.getElementById("modal-video");
+
+  // Vérifie si les éléments existent avant d'appliquer setAttribute
+  if (modalImage) {
+    modalImage.setAttribute("tabindex", "0");
+    modalImage.focus(); // Met le focus sur l'image
+  }
+  
+  if (modalVideo) {
+    modalVideo.setAttribute("tabindex", "0");
+    modalVideo.focus(); // Met le focus sur la vidéo
+  }
+
+ 
+  closeModalBtn.setAttribute("tabindex", "0");
+
+  // Fermer la modale avec "Échap"
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      modal.style.display = "none";
+    }
+  });
+
+   // accesibilité clavier avec fleches
+
+   leftArrow.setAttribute("tabindex", "0"); // Rendre la flèche gauche focusable
+   rightArrow.setAttribute("tabindex", "0"); // Rendre la flèche droite focusable
+ 
+   // Navigation avec la touche "Entrée"
+   
+   leftArrow.addEventListener("keydown", (event) => {
+     console.log("Touche détectée sur flèche gauche :", event.key);
+     if (event.key === "Enter" || event.key === " ") {
+       event.preventDefault(); // Empêche tout comportement indésirable
+       console.log("Navigation vers l'image précédente");
+       currentIndex = (currentIndex - 1 + currentMedia.length) % currentMedia.length;
+       updateModal();
+       leftArrow.focus();// On remet le focus sur la flèche
+     }
+   });
+   
+   rightArrow.addEventListener("keydown", (event) => {
+     console.log("Touche détectée sur flèche droite :", event.key);
+     if (event.key === "Enter" || event.key === " ") {
+       event.preventDefault();
+       console.log("Navigation vers l'image suivante");
+       currentIndex = (currentIndex + 1) % currentMedia.length;
+       updateModal();
+       rightArrow.focus(); // On remet le focus sur la flèche
+     }
+   });
 }
+
 
 function closedmodal() {
   closeModalBtn.addEventListener("click", () => {
     modal.style.display = "none";
+ 
   });
 
   console.log("j ai fermé l'ímage");
@@ -326,8 +396,10 @@ function loadImageInModal(imageSrc, titleParagraph) {
   modalImage.src = imageSrc; // Change la source de l'image
   modalTitle.textContent = titleParagraph; // Ajoute le titre sous l'image
   modalTitle.className = titleParagraph.className;
-  modalTitle.setAttribute('tabindex', '-1');
-  modalTitle.focus()
+  modalTitle.setAttribute("tabindex", "-1");
+  modalTitle.focus();
+
+  modalImage.setAttribute("tabindex", "0");
 }
 
 function loadVideoModal(videoSrc, titleParagraph) {
@@ -353,7 +425,6 @@ function updateModal() {
     loadVideoModal(videoSrc, mediaItem.title);
   }
 
-  
 }
 //Permet de faire defiler les images au click
 
@@ -367,6 +438,12 @@ rightArrow.addEventListener("click", () => {
   currentIndex = (currentIndex + 1) % currentMedia.length;
   console.log("Image suivante - Index actuel :", currentIndex);
   updateModal();
+
+ 
+  
+
+
+
 });
 
 main();
