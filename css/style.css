@@ -1,326 +1,317 @@
 @import url("photographer.css");
 
 body {
-    font-family: "DM Sans", sans-serif;
-    margin: 0;
+  font-family: "DM Sans", sans-serif;
+  margin: 0;
 }
 
-
 header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    height: 90px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 90px;
 }
 
 h1 {
-    color: #901C1C;
-    margin-right: 100px;
+  color: #901c1c;
+  margin-right: 100px;
 }
 
 .logo {
-    height: 50px;
-    margin-left: 100px;
+  height: 50px;
+  margin-left: 100px;
 }
 
 .photographer_section {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 70px;
-    margin-top: 100px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 70px;
+  margin-top: 100px;
 }
 
-
 .photographer_section a {
-    justify-self: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    text-decoration:none
+  justify-self: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-decoration: none;
 }
 
 .photographer_section article {
-    justify-self: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+  justify-self: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .photographer_section article h2 {
-    color: #D3573C;
-    font-size: 36px;
-   
+  color: #d3573c;
+  font-size: 36px;
 }
 
 .photographer_section article img {
-    height: 150px;
-    width: 150px;
+  height: 150px;
+  width: 150px;
 }
 
 #photographers img {
-    width: 200px; /* Largeur en pixels */
-    height: 200px; /* Hauteur en pixels */
-    border-radius: 50%; /* Optionnel : arrondir les coins */
+  width: 200px; /* Largeur en pixels */
+  height: 200px; /* Hauteur en pixels */
+  border-radius: 50%; /* Optionnel : arrondir les coins */
 }
 
-
-
-
 .photographer-location {
-   color: #901C1C;
-   margin-top:-20px;
+  color: #901c1c;
+  margin-top: -20px;
 }
 
 .photographer-price {
-    color: #757575;
-    margin-top:-10px;
+  color: #757575;
+  margin-top: -10px;
 }
 
-.photographer-tagline{
-    margin-top:-10px;
+.photographer-tagline {
+  margin-top: -10px;
 }
-
 
 /*page photographer*/
 
 /* Style pour la section photographe */
-.photograph-header{
-    
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-      
-    
-
+.photograph-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
 }
 
 /* Image du portrait du photographe */
 #photographer-portrait {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%; /* Pour une image ronde */
-    object-fit: cover; /* Pour assurer que l'image est bien cadrée */
-    margin-right: 40px;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%; /* Pour une image ronde */
+  object-fit: cover; /* Pour assurer que l'image est bien cadrée */
+  margin-right: 40px;
 }
 
 /* Conteneur pour le nom */
 #name-container {
-    font-size: 48px;
-    font-weight: bold;
-    color: #D3573C;
-    margin: 0;
-    margin-left: 20px;
+  font-size: 48px;
+  font-weight: bold;
+  color: #d3573c;
+  margin: 0;
+  margin-left: 20px;
 }
 
 /* Conteneur pour les informations de localisation */
 #infos-container {
-    font-size: 18px;
-    color: #901C1C;
-    margin: 10px 0;
-    margin-left: 20px;
+  font-size: 18px;
+  color: #901c1c;
+  margin: 10px 0;
+  margin-left: 20px;
 }
 
 /* Conteneur pour la tagline */
 #tagline-container {
-    font-size: 16px;
-    color: #6B6B6B;
-    font-style:normal;
-    margin-left: 20px;
+  font-size: 16px;
+  color: #6b6b6b;
+  font-style: normal;
+  margin-left: 20px;
 }
 
 /* Bouton pour contacter */
 
 button.contact-button {
-    font-size: 20px;
-    font-weight: bold;
-    color: white;
-    padding: 11px;
-    width: 170px;
-    height: 70px;
-    border: none;
-    background-color: #901C1C;
-    border-radius: 5px;
-    cursor: pointer;
-    margin: 0 5vw;
-
-    
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  padding: 11px;
+  width: 170px;
+  height: 70px;
+  border: none;
+  background-color: #901c1c;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0 5vw;
 }
 
 button.contact-button:hover {
-    background-color: #901C1C;
+  background-color: #901c1c;
 }
-
 
 /*css pour les images des photographes*/
 
 #media-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 30px 70px;
-    margin-top: 58px;
-    margin-left: 100px;
-    margin-right: 100px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 30px 70px;
+  margin-top: 58px;
+  margin-left: 100px;
+  margin-right: 100px;
 }
 
-
-#media-container img, #media-container video {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-    border-radius: 5px;
-    max-height: 80vh;
+#media-container img,
+#media-container video {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 5px;
+  max-height: 80vh;
 }
 
-.container-likes{
-    display:flex;
-    justify-content: space-between;
-    align-items: center;
-    
-
-    
-
+.container-likes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.container-likes p{
-    color:#901C1C;
-    font-size:20px;
-    font-weight:bold;
-   
-  
+.container-likes p {
+  color: #901c1c;
+  font-size: 20px;
+  font-weight: bold;
 }
-
-
 
 /* CSS pour le coeur */
 
 .fa-solid.fa-heart.heart-icon {
-    color: #901C1C;
-    font-size: 20px;
-    font-weight: bold;   
+  color: #901c1c;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 /*css pour coeur etlikes*/
 
-.stylediv{
-    display: flex;
-    align-items: baseline;
-    gap:5px;
+.stylediv {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
 }
-   
- /*css pour la banniere*/
 
-.fa-solid.fa-heart{
-    color: black;
-}  
+/*css pour la banniere*/
 
-.bannerlikes{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    gap: 100px;
-    position: fixed;
-    bottom: 0px;
-    right: 20px;
-    background-color: #db8876;
-    border-radius: 5px 5px 0px 0px ;
-    z-index: 5;
-    padding: 10px 25px;
-    width: 260px;
+.fa-solid.fa-heart {
+  color: black;
+}
+
+.bannerlikes {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 100px;
+  position: fixed;
+  bottom: 0px;
+  right: 20px;
+  background-color: #db8876;
+  border-radius: 5px 5px 0px 0px;
+  z-index: 5;
+  padding: 10px 25px;
+  width: 260px;
 }
 
 .bannerlikes p.tarifjournalier,
 .bannerlikes p.totalikes {
-    color: #000;
-    text-align: center;
-    font-family: "DM Sans";
-    font-size: 18px;
-    font-style: normal;
-    font-weight: bold;
-    line-height: normal;
+  color: #000;
+  text-align: center;
+  font-family: "DM Sans";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: bold;
+  line-height: normal;
 }
 
-
-
-.bannerstyle{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap:10px;
+.bannerstyle {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
 }
 
 /* liste depliante*/
 
 #dropdown-container {
-    position: absolute;
-    left:190px;
-    font-size: 20px;
-    font-weight: bold;
-    color: white;
-    padding: 24px;
-    width: 170px;
-    border: none;
-    background-color: #901C1C;
-    border-radius: 5px;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    gap:10px;
+  position: absolute;
+  left: 190px;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  padding: 24px;
+  width: 170px;
+  border: none;
+  background-color: #901c1c;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
-
 
 .close {
-    display: none !important;
+  display: none !important;
 }
 .open {
-    display:block;
-  
+  display: block;
 }
 
-.title-dropdown{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-   
+.title-dropdown {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
 }
-.dropdown-options{
-    display: flex;
-    flex-direction:column;
-    gap: 10px;
-    height: 70px;
+
+/* Flèche du dropdown */
+
+.title-dropdown button {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 70px;
 }
 
 .dropdown-title {
-    
-    padding-bottom: 5px;
-    width: 95%;
-    
+  padding-bottom: 5px;
+  width: 95%;
 }
+/* Style des boutons de la liste */
 
 .option-title {
-    border-bottom: 1px solid white;
-    width: 100%;
-    padding-bottom: 5px;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 20px;
+  text-align: left;
+  cursor: pointer;
+  padding: 5px;
+  border-bottom: 1px solid white;
+  width: 100%;
 }
 
 
 
-.filter-dropdown{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    gap: 34px;
-    margin-top: 20px;
+.filter-dropdown {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 34px;
+  margin-top: 20px;
 }
 
-.filter-dropdown h3{
-    margin-left: 98px;
+.filter-dropdown h3 {
+  margin-left: 98px;
 }
-
-
-
-
-
-

@@ -188,7 +188,7 @@ function displayDropdown() {
   dropdownButton.appendChild(titledropdown);
 
   // Icône de flèche
-  const fleche = document.createElement("i");
+  const fleche = document.createElement("button");
   fleche.classList.add("fa-solid", "fa-angle-up");
   dropdownButton.appendChild(fleche);
   dropdownContainer.appendChild(dropdownButton);
@@ -198,7 +198,7 @@ function displayDropdown() {
   dropdownOptions.classList.add("dropdown-options", "close");
 
   options.slice(1).forEach((optionText) => {
-    const option = document.createElement("span");
+    const option = document.createElement("button");
     option.textContent = optionText;
     option.classList.add("option-title");
 
@@ -318,8 +318,6 @@ function openModal(index) {
   modal.classList.add("modal-overlay");
   modal.style.display = "flex"; // Affiche la modale
 
-  
-
   updateModal(); // Charge l'image ou la vidéo AVANT d'ajouter les attributs
 
   // Récupère les éléments après l'affichage
@@ -331,57 +329,57 @@ function openModal(index) {
     modalImage.setAttribute("tabindex", "0");
     modalImage.focus(); // Met le focus sur l'image
   }
-  
+
   if (modalVideo) {
     modalVideo.setAttribute("tabindex", "0");
     modalVideo.focus(); // Met le focus sur la vidéo
   }
 
- 
   closeModalBtn.setAttribute("tabindex", "0");
 
-  // Fermer la modale avec "Échap"
+  // Fermer la modale avec "Échap" et "Entrée"
   document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
+    if (event.key === "Escape" || event.key === "Enter") {
       modal.style.display = "none";
     }
   });
 
-   // accesibilité clavier avec fleches
+  // accesibilité clavier avec fleches
 
-   leftArrow.setAttribute("tabindex", "0"); // Rendre la flèche gauche focusable
-   rightArrow.setAttribute("tabindex", "0"); // Rendre la flèche droite focusable
- 
-   // Navigation avec la touche "Entrée"
-   
-   leftArrow.addEventListener("keydown", (event) => {
-     console.log("Touche détectée sur flèche gauche :", event.key);
-     if (event.key === "Enter" || event.key === " ") {
-       event.preventDefault(); // Empêche tout comportement indésirable
-       console.log("Navigation vers l'image précédente");
-       currentIndex = (currentIndex - 1 + currentMedia.length) % currentMedia.length;
-       updateModal();
-       leftArrow.focus();// On remet le focus sur la flèche
-     }
-   });
-   
-   rightArrow.addEventListener("keydown", (event) => {
-     console.log("Touche détectée sur flèche droite :", event.key);
-     if (event.key === "Enter" || event.key === " ") {
-       event.preventDefault();
-       console.log("Navigation vers l'image suivante");
-       currentIndex = (currentIndex + 1) % currentMedia.length;
-       updateModal();
-       rightArrow.focus(); // On remet le focus sur la flèche
-     }
-   });
+  leftArrow.setAttribute("tabindex", "0"); // Rendre la flèche gauche focusable
+  rightArrow.setAttribute("tabindex", "0"); // Rendre la flèche droite focusable
+
+  // Navigation avec la touche "Entrée"
+
+  leftArrow.addEventListener("keydown", (event) => {
+    console.log("Touche détectée sur flèche gauche :", event.key);
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault(); // Empêche tout comportement indésirable
+      event.stopPropagation(); // Évite de remonter l'événement
+      console.log("Navigation vers l'image précédente");
+      currentIndex =
+        (currentIndex - 1 + currentMedia.length) % currentMedia.length;
+      updateModal();
+      leftArrow.focus(); // On remet le focus sur la flèche
+    }
+  });
+
+  rightArrow.addEventListener("keydown", (event) => {
+    console.log("Touche détectée sur flèche droite :", event.key);
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      event.stopPropagation();
+      console.log("Navigation vers l'image suivante");
+      currentIndex = (currentIndex + 1) % currentMedia.length;
+      updateModal();
+      rightArrow.focus(); // On remet le focus sur la flèche
+    }
+  });
 }
-
 
 function closedmodal() {
   closeModalBtn.addEventListener("click", () => {
     modal.style.display = "none";
- 
   });
 
   console.log("j ai fermé l'ímage");
@@ -424,7 +422,6 @@ function updateModal() {
   if (mediaItem.video) {
     loadVideoModal(videoSrc, mediaItem.title);
   }
-
 }
 //Permet de faire defiler les images au click
 
@@ -438,12 +435,6 @@ rightArrow.addEventListener("click", () => {
   currentIndex = (currentIndex + 1) % currentMedia.length;
   console.log("Image suivante - Index actuel :", currentIndex);
   updateModal();
-
- 
-  
-
-
-
 });
 
 main();
