@@ -364,41 +364,61 @@ function openModal(index) {
   leftArrow.setAttribute("tabindex", "0"); // Rendre la flèche gauche focusable
   rightArrow.setAttribute("tabindex", "0"); // Rendre la flèche droite focusable
 
-  // Navigation avec la touche "Entrée"
 
-  leftArrow.addEventListener("keydown", (event) => {
-    console.log("Touche détectée sur flèche gauche :", event.key);
-    if (event.key === "Enter" || event.key === " ") {
-      event.preventDefault(); // Empêche tout comportement indésirable
-      event.stopPropagation(); // Évite de remonter l'événement
-      console.log("Navigation vers l'image précédente");
-      currentIndex =
-        (currentIndex - 1 + currentMedia.length) % currentMedia.length;
-      updateModal();
-      leftArrow.focus(); // On remet le focus sur la flèche
-    }
-  });
-
-  rightArrow.addEventListener("keydown", (event) => {
-    console.log("Touche détectée sur flèche droite :", event.key);
-    if (event.key === "Enter" || event.key === " ") {
-      event.preventDefault();
-      event.stopPropagation();
-      console.log("Navigation vers l'image suivante");
-      currentIndex = (currentIndex + 1) % currentMedia.length;
-      updateModal();
-      rightArrow.focus(); // On remet le focus sur la flèche
-    }
-  });
 }
 
-function closedmodal() {
+
+
+function displayPreviousMedia() {
+  currentIndex = (currentIndex - 1 + currentMedia.length) % currentMedia.length;
+  updateModal();
+  leftArrow.focus(); 
+}
+
+function displayNextMedia() {
+  currentIndex = (currentIndex + 1) % currentMedia.length;
+  updateModal();
+  rightArrow.focus(); 
+}
+
+leftArrow.addEventListener("keydown", (event) => {
+  if (event.key === "Enter" || event.key === " ") {
+    displayPreviousMedia();
+  }
+});
+
+leftArrow.addEventListener("click", () => {
+  displayPreviousMedia();
+});
+
+rightArrow.addEventListener("keydown", (event) => {
+  if (event.key === "Enter" || event.key === " ") {
+    displayNextMedia();
+  }
+});
+
+rightArrow.addEventListener("click", () => {
+  displayNextMedia();
+});
+
+modal.addEventListener("keydown", (event) => {
+  if (event.key === "ArrowLeft") {
+    displayPreviousMedia();
+  } else if (event.key === "ArrowRight") {
+    displayNextMedia();
+  }
+});
+
+
+
+
+function closeMediaModal() {
   modal.style.display = "none";
 }
-  closeModalBtn.addEventListener("click",closedmodal); 
+  closeModalBtn.addEventListener("click",closeMediaModal); 
   closeModalBtn.addEventListener("keydown",(event)=> {
     if(event.key ==="Enter"){
-      closedmodal()
+      closeMediaModal()
     }
   
     
@@ -442,18 +462,8 @@ function updateModal() {
     loadVideoModal(videoSrc, mediaItem.title);
   }
 }
-//Permet de faire defiler les images au click
 
-leftArrow.addEventListener("click", () => {
-  currentIndex = (currentIndex - 1 + currentMedia.length) % currentMedia.length;
-  console.log("Image précédente - Index actuel :", currentIndex);
-  updateModal();
-});
 
-rightArrow.addEventListener("click", () => {
-  currentIndex = (currentIndex + 1) % currentMedia.length;
-  console.log("Image suivante - Index actuel :", currentIndex);
-  updateModal();
-});
+
 
 main();
