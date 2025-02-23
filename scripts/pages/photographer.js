@@ -372,18 +372,19 @@ function openModal(index) {
 function displayPreviousMedia() {
   currentIndex = (currentIndex - 1 + currentMedia.length) % currentMedia.length;
   updateModal();
-  leftArrow.focus(); 
+   
 }
 
 function displayNextMedia() {
   currentIndex = (currentIndex + 1) % currentMedia.length;
   updateModal();
-  rightArrow.focus(); 
+  
 }
 
 leftArrow.addEventListener("keydown", (event) => {
   if (event.key === "Enter" || event.key === " ") {
     displayPreviousMedia();
+    leftArrow.focus();
   }
 });
 
@@ -394,6 +395,7 @@ leftArrow.addEventListener("click", () => {
 rightArrow.addEventListener("keydown", (event) => {
   if (event.key === "Enter" || event.key === " ") {
     displayNextMedia();
+    rightArrow.focus();
   }
 });
 
@@ -404,8 +406,10 @@ rightArrow.addEventListener("click", () => {
 modal.addEventListener("keydown", (event) => {
   if (event.key === "ArrowLeft") {
     displayPreviousMedia();
+    leftArrow.focus();
   } else if (event.key === "ArrowRight") {
     displayNextMedia();
+    rightArrow.focus();
   }
 });
 

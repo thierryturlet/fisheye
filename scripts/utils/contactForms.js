@@ -48,8 +48,14 @@ function closeModal() {
   modal.style.display = "none";
 }
 // Fermer la modale avec la touche Échap
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") {
+
+const closeModalContact = document.getElementById("close-modal-contact");
+
+closeModalContact.setAttribute("tabindex", "0");
+
+closeModalContact.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
     closeModal();
   }
+
 });
