@@ -91,11 +91,15 @@ function displayMedia(media) {
       // Ouvre la modale en appuyant sur "Entrée"
 
       imageElement.addEventListener("keydown", (event) => {
-        console.log("Touche pressée sur l'image (index : " + index + ") : " + event.key);
+        console.log(
+          "Touche pressée sur l'image (index : " + index + ") : " + event.key
+        );
         if (event.key === "Enter") {
-          console.log("Touche Enter pressée sur l'image (index : " + index + ")"); 
+          console.log(
+            "Touche Enter pressée sur l'image (index : " + index + ")"
+          );
           openModal(index);
-          
+
           loadImageInModal(imageElement.src, titleParagraph.textContent);
         }
       });
@@ -110,7 +114,19 @@ function displayMedia(media) {
 
       videoElement.src =
         "./photos/imagesetvideos/" + photographerFolder + "/" + mediaItem.video;
-      videoElement.controls = true; // Ajout des contrôles pour la vidéo
+
+      videoElement.tabIndex = 0;
+
+      videoElement.addEventListener("click", () => {
+        openModal();
+      });
+
+      videoElement.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+          openModal(index);
+        }
+      });
+
       mediaElement.appendChild(videoElement);
     }
 
@@ -340,9 +356,6 @@ function openModal(index) {
 
   closeModalBtn.setAttribute("tabindex", "0");
 
-  // Fermer la modale avec "Échap" et "Entrée"
-
-
   // accesibilité clavier avec fleches
 
   leftArrow.setAttribute("tabindex", "0"); // Rendre la flèche gauche focusable
@@ -379,14 +392,10 @@ function openModal(index) {
 function closedmodal() {
   closeModalBtn.addEventListener("click", () => {
     modal.style.display = "none";
-  }
-
-);
+  });
 
   console.log("j ai fermé l'ímage");
 }
-
- 
 
 closedmodal();
 
