@@ -393,14 +393,18 @@ function openModal(index) {
 }
 
 function closedmodal() {
-  closeModalBtn.addEventListener("click", () => {
-    modal.style.display = "none";
+  modal.style.display = "none";
+}
+  closeModalBtn.addEventListener("click",closedmodal); 
+  closeModalBtn.addEventListener("keydown",(event)=> {
+    if(event.key ==="Enter"){
+      closedmodal()
+    }
+  
+    
   });
 
-  console.log("j ai fermé l'ímage");
-}
-
-closedmodal();
+  
 
 function loadImageInModal(imageSrc, titleParagraph) {
   createImageElement();
