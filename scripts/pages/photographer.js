@@ -85,7 +85,7 @@ function displayMedia(media) {
 
       imageElement.addEventListener("click", () => {
         openModal(index);
-        loadImageInModal(imageElement.src, titleParagraph.textContent);
+        
       });
 
       // Ouvre la modale en appuyant sur "Entrée"
@@ -100,7 +100,7 @@ function displayMedia(media) {
           );
           openModal(index);
 
-          loadImageInModal(imageElement.src, titleParagraph.textContent);
+        
         }
       });
 
@@ -115,10 +115,13 @@ function displayMedia(media) {
       videoElement.src =
         "./photos/imagesetvideos/" + photographerFolder + "/" + mediaItem.video;
 
+
+
+      // ouverture de la modale au click et Entree
       videoElement.tabIndex = 0;
 
       videoElement.addEventListener("click", () => {
-        openModal();
+        openModal(index);
       });
 
       videoElement.addEventListener("keydown", (event) => {
