@@ -1,6 +1,9 @@
 function displayModal() {
   const modal = document.getElementById("contact_modal");
   modal.style.display = "flex";
+
+  const formName = document.querySelector(".modal header h2");
+  formName.focus(); 
 }
 
 function closeModal() {
