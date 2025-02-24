@@ -149,7 +149,7 @@ function displayMedia(media) {
 
     //Ajout des coeurs
 
-    const heartLikes = document.createElement("i");
+    const heartLikes = document.createElement("button");
     heartLikes.classList.add("fa-solid", "fa-heart", "heart-icon");
     divLikeContainer.appendChild(heartLikes);
 
@@ -199,8 +199,11 @@ function displayDropdown() {
 
   const options = ["Popularité", "Date", "Titre"];
 
-  const dropdownButton = document.createElement("div");
+  // Bouton principal du dropdown
+  const dropdownButton = document.createElement("button");
   dropdownButton.classList.add("title-dropdown");
+  dropdownButton.tabIndex = 0; // Permet le focus
+ 
 
   // Création du texte affiché sur le bouton
   const titledropdown = document.createElement("span");
@@ -212,17 +215,22 @@ function displayDropdown() {
   // Icône de flèche
   const fleche = document.createElement("button");
   fleche.classList.add("fa-solid", "fa-angle-up");
+  
   dropdownButton.appendChild(fleche);
   dropdownContainer.appendChild(dropdownButton);
 
   // Création de la liste des options du menu
   const dropdownOptions = document.createElement("div");
   dropdownOptions.classList.add("dropdown-options", "close");
+ 
+
 
   options.slice(1).forEach((optionText) => {
     const option = document.createElement("button");
     option.textContent = optionText;
     option.classList.add("option-title");
+    
+    
 
     // Ajout d'un événement de clic sur chaque option
     option.addEventListener("click", () => {
@@ -240,26 +248,34 @@ function displayDropdown() {
   dropdownContainer.appendChild(dropdownOptions);
 
   // Gestion de l'ouverture et fermeture du menu
-  fleche.addEventListener("click", toggleDropdown);
+   // Gestion de l'ouverture et fermeture du menu
+   fleche.addEventListener("click", toggleDropdown);
 
-  function toggleDropdown() {
-    if (fleche.classList.contains("fa-angle-up")) {
-      openDropdown();
-    } else {
-      closeDropdown();
-    }
-  }
+   function toggleDropdown() {
+     if (fleche.classList.contains("fa-angle-up")) {
+       openDropdown();
+     } else {
+       closeDropdown();
+     }
+   }
 
   function openDropdown() {
+    
     fleche.classList.replace("fa-angle-up", "fa-chevron-down"); //Remplace la flèche vers le haut par une flèche vers le bas
     dropdownOptions.classList.replace("close", "open"); //Ouvre le menu (close devient open)
     dropdownButton.style.borderBottom = "1px solid white";
+
+    const optionsList = dropdownOptions.querySelectorAll(".option-title");
+    optionsList[0].tabIndex = 0; // Active le focus sur la première option
+    optionsList[0].focus();
   }
 
   function closeDropdown() {
+    
     fleche.classList.replace("fa-chevron-down", "fa-angle-up"); //Remet la flèche vers le haut
     dropdownOptions.classList.replace("open", "close"); //Ferme le menu (open devient close).
     dropdownButton.style.borderBottom = "none";
+    dropdownButton.focus();
   }
 }
 

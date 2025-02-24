@@ -2,8 +2,9 @@ function displayModal() {
   const modal = document.getElementById("contact_modal");
   modal.style.display = "flex";
 
+ 
   const formName = document.querySelector(".modal header h2");
-  formName.focus(); 
+  formName.focus();                       
 }
 
 function closeModal() {
@@ -15,6 +16,9 @@ function closeModal() {
 
 function namePhotographerModal(name) {
   const formName = document.querySelector(".modal header h2");
+
+  formName.id = "focus-modal";
+  formName.setAttribute("tabindex", "-1"); //ajout du focus sur le H2
 
   const photographerName = document.createElement("span");
   photographerName.textContent = name;

@@ -178,6 +178,8 @@ button.contact-button:hover {
   color: #901c1c;
   font-size: 20px;
   font-weight: bold;
+  border:none;
+  background-color: transparent;
 }
 
 /*css pour coeur etlikes*/
@@ -287,6 +289,7 @@ button.contact-button:hover {
 .dropdown-title {
   padding-bottom: 5px;
   width: 95%;
+  margin-right: 50px;
 }
 /* Style des boutons de la liste */
 
