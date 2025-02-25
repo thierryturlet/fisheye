@@ -203,6 +203,12 @@ function displayDropdown() {
   const dropdownButton = document.createElement("button");
   dropdownButton.classList.add("title-dropdown");
   dropdownButton.tabIndex = 0; // Permet le focus
+
+  dropdownButton.setAttribute("role", "button");
+  dropdownButton.setAttribute("aria-haspopup", "listbox");
+  dropdownButton.setAttribute("aria-expanded", "false");
+  dropdownButton.setAttribute("aria-labelledby", "dropdown-label");
+
  
 
   // Création du texte affiché sur le bouton
@@ -210,11 +216,13 @@ function displayDropdown() {
   titledropdown.textContent = options[0]; // Par défaut "Popularité"
   titledropdown.classList.add("dropdown-title");
   titledropdown.style.borderBottom = "none"; // Supprime la bordure sous Popularité
+  titledropdown.id = "dropdown-label"; // ID pour aria-labelledby
   dropdownButton.appendChild(titledropdown);
 
   // Icône de flèche
   const fleche = document.createElement("button");
   fleche.classList.add("fa-solid", "fa-angle-up");
+
   
   dropdownButton.appendChild(fleche);
   dropdownContainer.appendChild(dropdownButton);
@@ -222,14 +230,16 @@ function displayDropdown() {
   // Création de la liste des options du menu
   const dropdownOptions = document.createElement("div");
   dropdownOptions.classList.add("dropdown-options", "close");
- 
+  dropdownOptions.setAttribute("role", "listbox");
+  dropdownOptions.setAttribute("aria-labelledby", "dropdown-label");
 
 
   options.slice(1).forEach((optionText) => {
     const option = document.createElement("button");
     option.textContent = optionText;
     option.classList.add("option-title");
-    
+    option.setAttribute("role", "option");
+    option.tabIndex = 0;
     
 
     // Ajout d'un événement de clic sur chaque option
@@ -260,6 +270,7 @@ function displayDropdown() {
    }
 
   function openDropdown() {
+    dropdownButton.setAttribute("aria-expanded", "true");
     
     fleche.classList.replace("fa-angle-up", "fa-chevron-down"); //Remplace la flèche vers le haut par une flèche vers le bas
     dropdownOptions.classList.replace("close", "open"); //Ouvre le menu (close devient open)
@@ -271,7 +282,7 @@ function displayDropdown() {
   }
 
   function closeDropdown() {
-    
+    dropdownButton.setAttribute("aria-expanded", "false");
     fleche.classList.replace("fa-chevron-down", "fa-angle-up"); //Remet la flèche vers le haut
     dropdownOptions.classList.replace("open", "close"); //Ferme le menu (open devient close).
     dropdownButton.style.borderBottom = "none";

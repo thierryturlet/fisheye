@@ -61,6 +61,7 @@ h1 {
   width: 200px; /* Largeur en pixels */
   height: 200px; /* Hauteur en pixels */
   border-radius: 50%; /* Optionnel : arrondir les coins */
+  object-fit: cover;
 }
 
 .photographer-location {
@@ -305,7 +306,9 @@ button.contact-button:hover {
   width: 100%;
 }
 
-
+.option-title:last-child {
+  border-bottom: none;
+}
 
 .filter-dropdown {
   display: flex;
