@@ -85,7 +85,6 @@ function displayMedia(media) {
 
       imageElement.addEventListener("click", () => {
         openModal(index);
-        
       });
 
       // Ouvre la modale en appuyant sur "Entrée"
@@ -99,8 +98,6 @@ function displayMedia(media) {
             "Touche Enter pressée sur l'image (index : " + index + ")"
           );
           openModal(index);
-
-        
         }
       });
 
@@ -114,8 +111,6 @@ function displayMedia(media) {
 
       videoElement.src =
         "./photos/imagesetvideos/" + photographerFolder + "/" + mediaItem.video;
-
-
 
       // ouverture de la modale au click et Entree
       videoElement.tabIndex = 0;
@@ -200,16 +195,14 @@ function displayDropdown() {
   const options = ["Popularité", "Date", "Titre"];
 
   // Bouton principal du dropdown
-  const dropdownButton = document.createElement("button");
+  const dropdownButton = document.createElement("div");
   dropdownButton.classList.add("title-dropdown");
   dropdownButton.tabIndex = 0; // Permet le focus
 
-  dropdownButton.setAttribute("role", "button");
+  
   dropdownButton.setAttribute("aria-haspopup", "listbox");
   dropdownButton.setAttribute("aria-expanded", "false");
   dropdownButton.setAttribute("aria-labelledby", "dropdown-label");
-
- 
 
   // Création du texte affiché sur le bouton
   const titledropdown = document.createElement("span");
@@ -223,7 +216,6 @@ function displayDropdown() {
   const fleche = document.createElement("button");
   fleche.classList.add("fa-solid", "fa-angle-up");
 
-  
   dropdownButton.appendChild(fleche);
   dropdownContainer.appendChild(dropdownButton);
 
@@ -233,14 +225,12 @@ function displayDropdown() {
   dropdownOptions.setAttribute("role", "listbox");
   dropdownOptions.setAttribute("aria-labelledby", "dropdown-label");
 
-
   options.slice(1).forEach((optionText) => {
     const option = document.createElement("button");
     option.textContent = optionText;
     option.classList.add("option-title");
     option.setAttribute("role", "option");
     option.tabIndex = 0;
-    
 
     // Ajout d'un événement de clic sur chaque option
     option.addEventListener("click", () => {
@@ -258,20 +248,20 @@ function displayDropdown() {
   dropdownContainer.appendChild(dropdownOptions);
 
   // Gestion de l'ouverture et fermeture du menu
-   // Gestion de l'ouverture et fermeture du menu
-   fleche.addEventListener("click", toggleDropdown);
+  // Gestion de l'ouverture et fermeture du menu
+  fleche.addEventListener("click", toggleDropdown);
 
-   function toggleDropdown() {
-     if (fleche.classList.contains("fa-angle-up")) {
-       openDropdown();
-     } else {
-       closeDropdown();
-     }
-   }
+  function toggleDropdown() {
+    if (fleche.classList.contains("fa-angle-up")) {
+      openDropdown();
+    } else {
+      closeDropdown();
+    }
+  }
 
   function openDropdown() {
     dropdownButton.setAttribute("aria-expanded", "true");
-    
+
     fleche.classList.replace("fa-angle-up", "fa-chevron-down"); //Remplace la flèche vers le haut par une flèche vers le bas
     dropdownOptions.classList.replace("close", "open"); //Ouvre le menu (close devient open)
     dropdownButton.style.borderBottom = "1px solid white";
@@ -390,22 +380,16 @@ function openModal(index) {
 
   leftArrow.setAttribute("tabindex", "0"); // Rendre la flèche gauche focusable
   rightArrow.setAttribute("tabindex", "0"); // Rendre la flèche droite focusable
-
-
 }
-
-
 
 function displayPreviousMedia() {
   currentIndex = (currentIndex - 1 + currentMedia.length) % currentMedia.length;
   updateModal();
-   
 }
 
 function displayNextMedia() {
   currentIndex = (currentIndex + 1) % currentMedia.length;
   updateModal();
-  
 }
 
 leftArrow.addEventListener("keydown", (event) => {
@@ -440,22 +424,15 @@ modal.addEventListener("keydown", (event) => {
   }
 });
 
-
-
-
 function closeMediaModal() {
   modal.style.display = "none";
 }
-  closeModalBtn.addEventListener("click",closeMediaModal); 
-  closeModalBtn.addEventListener("keydown",(event)=> {
-    if(event.key ==="Enter"){
-      closeMediaModal()
-    }
-  
-    
-  });
-
-  
+closeModalBtn.addEventListener("click", closeMediaModal);
+closeModalBtn.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    closeMediaModal();
+  }
+});
 
 function loadImageInModal(imageSrc, titleParagraph) {
   createImageElement();
@@ -493,8 +470,5 @@ function updateModal() {
     loadVideoModal(videoSrc, mediaItem.title);
   }
 }
-
-
-
 
 main();

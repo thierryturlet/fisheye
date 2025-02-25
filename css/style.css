@@ -304,6 +304,8 @@ button.contact-button:hover {
   padding: 5px;
   border-bottom: 1px solid white;
   width: 100%;
+  font-weight: 600;
+  padding-left: 0;
 }
 
 .option-title:last-child {
