@@ -29,7 +29,7 @@ function displayPhotographerInfo(photographer, totalLikes) {
   ).innerHTML = `${photographer.city}, ${photographer.country}`;
   document.getElementById(
     "photographer-portrait"
-  ).src = `./photos/Sample_photos/Photographers_ID_Photos/${photographer.portrait}`;
+  ).src = `./photos/samplephotos/photographersidphotos/${photographer.portrait}`;
   document.getElementById("tagline-container").innerHTML = photographer.tagline;
 
   // ajout des class css
@@ -42,7 +42,7 @@ function displayPhotographerInfo(photographer, totalLikes) {
   infosContainer.classList.add("photographer-location");
 
   const photographerPortrait = document.getElementById("photographer-portrait");
-  photographerPortrait.src = `./photos/Sample_photos/Photographers_ID_Photos/${photographer.portrait}`;
+  photographerPortrait.src = `./photos/samplephotos/photographersidphotos/${photographer.portrait}`;
   photographerPortrait.classList.add("photographer-portrait-image");
 
   const taglineContainer = document.getElementById("tagline-container");
