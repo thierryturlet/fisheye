@@ -1,5 +1,5 @@
 async function getPhotographers() {
-  const response = await fetch("http://127.0.0.1:5500/data/photographers.json");
+  const response = await fetch("./data/photographers.json");
 
   const data = await response.json();
 
@@ -7,7 +7,7 @@ async function getPhotographers() {
 }
 
 async function getPhotographerById(id) {
-  const response = await fetch("http://127.0.0.1:5500/data/photographers.json");
+  const response = await fetch("./data/photographers.json");
 
   const data = await response.json();
 
@@ -25,7 +25,7 @@ async function getPhotographerById(id) {
 }
 
 async function getMediaPhotographer(id) {
-  const response = await fetch("http://127.0.0.1:5500/data/photographers.json");
+  const response = await fetch("./data/photographers.json");
 
   const data = await response.json();
 
@@ -40,7 +40,7 @@ async function getMediaPhotographer(id) {
 }
 
 async function getLikesPhotographer(id) {
-  const response = await fetch("http://127.0.0.1:5500/data/photographers.json");
+  const response = await fetch("./data/photographers.json");
   const data = await response.json();
   let mediaList = data.media;
 
