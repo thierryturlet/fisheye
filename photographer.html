@@ -48,7 +48,7 @@
       <div class="bannerlikes">
         <div class="bannerstyle">
           <p class="totalikes"></p>
-          <i class="fa-solid fa-heart"></i>
+          <span class="fa-solid fa-heart" aria-hidden="true"></span>
         </div>
         <p class="tarifjournalier"></p>
       </div>
@@ -84,16 +84,16 @@
           <div class="styletitlemodal">
             <h2>Contactez-moi</h2>
           </div>
-          <img src="assets/icons/close.svg" onclick="closeModal()" id="close-modal-contact">
+          <img src="assets/icons/close.svg" alt="croixmodal" onclick="closeModal()" id="close-modal-contact">
         </header>
         <form>
           <div>
             <label>Prénom</label>
-            <input type="text" id="prenom">
+            <input type="text" id="prenom"aria-label="Prénom">
             <label>Nom</label>
-            <input type="text" id="nom">
+            <input type="text" id="nom" aria-label="Nom">
             <label>Email</label>
-            <input type="email" id="email" name="email" required="">
+            <input type="email" id="email" name="email" required aria-label="Adresse email">
             <label for="message">Votre message</label>
             <textarea id="message" name="message" rows="3" cols="35"></textarea>
           </div>
