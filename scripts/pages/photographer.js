@@ -1,3 +1,8 @@
+/*global getPhotographerById */
+/*global getMediaPhotographer */
+/*global getLikesPhotographer */
+/*global  namePhotographerModal*/
+
 async function main() {
   const params = new URLSearchParams(window.location.search);
   const idFromUrl = parseInt(params.get("id")); // Convertir en nombre
@@ -21,6 +26,8 @@ async function main() {
   const nameToDisplay = photographer.name;
   namePhotographerModal(nameToDisplay);
 }
+let currentMedia = []; // Stocke les médias du photographe
+let currentIndex = 0; // Stocke l’index du média affiché dans la modale
 
 function displayPhotographerInfo(photographer, totalLikes) {
   document.getElementById("name-container").innerHTML = photographer.name;
@@ -199,7 +206,6 @@ function displayDropdown() {
   dropdownButton.classList.add("title-dropdown");
   dropdownButton.tabIndex = 0; // Permet le focus
 
-  
   dropdownButton.setAttribute("aria-haspopup", "listbox");
   dropdownButton.setAttribute("aria-expanded", "false");
   dropdownButton.setAttribute("aria-labelledby", "dropdown-label");
@@ -247,7 +253,6 @@ function displayDropdown() {
 
   dropdownContainer.appendChild(dropdownOptions);
 
-  // Gestion de l'ouverture et fermeture du menu
   // Gestion de l'ouverture et fermeture du menu
   fleche.addEventListener("click", toggleDropdown);
 
@@ -434,22 +439,35 @@ closeModalBtn.addEventListener("keydown", (event) => {
   }
 });
 
+function getNextMediaTitle() {
+  let nextIndex = (currentIndex + 1) % currentMedia.length;
+  return currentMedia[nextIndex].title;
+}
+
+function getPreviousMediaTitle() {
+  let previousIndex = (currentIndex - 1 + currentMedia.length) % currentMedia.length;
+  return currentMedia[previousIndex].title;
+}
+
+
 function loadImageInModal(imageSrc, titleParagraph) {
   createImageElement();
-
+   getNextMediaTitle() 
+   getPreviousMediaTitle()
   const modalImage = document.getElementById("modal-image");
   modalImage.src = imageSrc; // Change la source de l'image
   modalTitle.textContent = titleParagraph; // Ajoute le titre sous l'image
   modalTitle.className = titleParagraph.className;
   modalTitle.setAttribute("tabindex", "-1");
-  modalTitle.focus();
-
+  //modalTitle.focus();
+  
   modalImage.setAttribute("tabindex", "0");
 }
 
 function loadVideoModal(videoSrc, titleParagraph) {
   createVideoElement();
-
+  getNextMediaTitle() 
+  getPreviousMediaTitle()
   const modalVideo = document.getElementById("modal-video");
   modalVideo.src = videoSrc;
   modalTitle.textContent = titleParagraph;
@@ -465,7 +483,9 @@ function updateModal() {
 
   if (mediaItem.image) {
     loadImageInModal(imageSrc, mediaItem.title);
+    
   }
+
   if (mediaItem.video) {
     loadVideoModal(videoSrc, mediaItem.title);
   }

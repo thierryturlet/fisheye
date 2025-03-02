@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 function displayModal() {
   const modal = document.getElementById("contact_modal");
   modal.style.display = "flex";
@@ -7,10 +9,7 @@ function displayModal() {
   formName.focus();                       
 }
 
-function closeModal() {
-  const modal = document.getElementById("contact_modal");
-  modal.style.display = "none";
-}
+
 
 //Ajout du nom du photographe
 

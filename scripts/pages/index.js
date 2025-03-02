@@ -1,4 +1,4 @@
-
+/* global getPhotographers */
 
 function displayPhotographers(photographers) {
   const photographersContainer = document.getElementById("photographers");
