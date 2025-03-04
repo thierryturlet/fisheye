@@ -29,7 +29,7 @@ function namePhotographerModal(name) {
 // gestion du formulaire
 
 const form = document.querySelector("form");
-console.log(form);
+
 form.addEventListener("submit", (event) => {
   event.preventDefault();
 

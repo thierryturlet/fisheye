@@ -16,8 +16,7 @@ async function getPhotographerById(id) {
   const data = await response.json();
 
   let photographerList = data.photographers;
-  console.log(id);
-  console.log(photographerList);
+ 
   let photographerToFind = null;
 
   photographerList.forEach((photographer) => {
@@ -34,11 +33,10 @@ async function getMediaPhotographer(id) {
   const data = await response.json();
 
   let mediaList = data.media;
-  console.log(id);
-  console.log(mediaList);
+ 
 
   let mediaToFind = mediaList.filter((media) => media.photographerId == id);
-  console.log(mediaToFind);
+ 
 
   return mediaToFind;
 }
@@ -68,7 +66,6 @@ async function getLikesPhotographer(id) {
     totalLikes += like;
   }
 
-  console.log(`Total likes for photographer ${id}: ${totalLikes}`);
   return totalLikes;
 }
 

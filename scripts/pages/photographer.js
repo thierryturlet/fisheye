@@ -80,7 +80,7 @@ function displayMedia(media) {
       // Ajouter une image
       const imageElement = document.createElement("img");
 
-      //accessibilite des images avec le clavier
+      
       imageElement.tabIndex = 0;
       const photographerFolder = mediaItem.photographerId;
 
@@ -97,13 +97,9 @@ function displayMedia(media) {
       // Ouvre la modale en appuyant sur "Entrée"
 
       imageElement.addEventListener("keydown", (event) => {
-        console.log(
-          "Touche pressée sur l'image (index : " + index + ") : " + event.key
-        );
+        
         if (event.key === "Enter") {
-          console.log(
-            "Touche Enter pressée sur l'image (index : " + index + ")"
-          );
+        
           openModal(index);
         }
       });
@@ -119,9 +115,10 @@ function displayMedia(media) {
       videoElement.src =
         "./photos/imagesetvideos/" + photographerFolder + "/" + mediaItem.video;
 
-      // ouverture de la modale au click et Entree
+
       videoElement.tabIndex = 0;
 
+      // ouverture de la modale au click et Entree
       videoElement.addEventListener("click", () => {
         openModal(index);
       });
@@ -142,12 +139,12 @@ function displayMedia(media) {
     // Ajouter un paragraphe pour le titre
     const titleParagraph = document.createElement("p");
     titleParagraph.textContent = mediaItem.title;
-    divLikeContainer.appendChild(titleParagraph); // Ajouter le titre à la div
+    divLikeContainer.appendChild(titleParagraph); 
 
     // Ajouter un paragraphe pour les likes
     const likesParagraph = document.createElement("p");
     likesParagraph.textContent = mediaItem.likes;
-    divLikeContainer.appendChild(likesParagraph); // Ajouter les likes à la div
+    divLikeContainer.appendChild(likesParagraph); 
 
     //Ajout des coeurs
 
@@ -204,7 +201,7 @@ function displayDropdown() {
   // Bouton principal du dropdown
   const dropdownButton = document.createElement("div");
   dropdownButton.classList.add("title-dropdown");
-  dropdownButton.tabIndex = 0; // Permet le focus
+  dropdownButton.tabIndex = 0; 
 
   dropdownButton.setAttribute("aria-haspopup", "listbox");
   dropdownButton.setAttribute("aria-expanded", "false");
@@ -360,7 +357,7 @@ function createVideoElement() {
 function openModal(index) {
   currentIndex = index; // Met à jour l’index de l’image actuelle
   modal.classList.add("modal-overlay");
-  modal.style.display = "flex"; // Affiche la modale
+  modal.style.display = "flex"; 
 
   updateModal(); // Charge l'image ou la vidéo AVANT d'ajouter les attributs
 
@@ -371,20 +368,20 @@ function openModal(index) {
   // Vérifie si les éléments existent avant d'appliquer setAttribute
   if (modalImage) {
     modalImage.setAttribute("tabindex", "0");
-    modalImage.focus(); // Met le focus sur l'image
+    modalImage.focus(); 
   }
 
   if (modalVideo) {
     modalVideo.setAttribute("tabindex", "0");
-    modalVideo.focus(); // Met le focus sur la vidéo
+    modalVideo.focus(); 
   }
 
   closeModalBtn.setAttribute("tabindex", "0");
 
-  // accesibilité clavier avec fleches
+  // accessibilité clavier avec fleches
 
-  leftArrow.setAttribute("tabindex", "0"); // Rendre la flèche gauche focusable
-  rightArrow.setAttribute("tabindex", "0"); // Rendre la flèche droite focusable
+  leftArrow.setAttribute("tabindex", "0"); 
+  rightArrow.setAttribute("tabindex", "0"); 
 }
 
 function displayPreviousMedia() {
