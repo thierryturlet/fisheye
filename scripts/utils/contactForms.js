@@ -3,11 +3,46 @@
 function displayModal() {
   const modal = document.getElementById("contact_modal");
   modal.style.display = "flex";
+  modal.setAttribute("aria-hidden", "false");
 
- 
-  const formName = document.querySelector(".modal header h2");
-  formName.focus();                       
+  // Ajouter tabindex="0" au h2 pour qu'il soit focusable
+  const modalTitle = document.querySelector(".modal header h2");
+  modalTitle.setAttribute("tabindex", "0");
+
+  
+
+  // Sélectionner tous les éléments focusables y compris le h2
+  const focusableElements = modal.querySelectorAll(
+    "h2, input, button, textarea, select, [tabindex]:not([tabindex='-1'])"
+  );
+
+  const firstElement = focusableElements[0]; // Premier élément focusable
+  const lastElement = focusableElements[focusableElements.length - 1]; // Dernier élément focusable
+
+  firstElement.focus(); // Met le focus sur le titre h2 au départ
+
+  // Gestion du piège de focus avec Tab et Shift + Tab
+  modal.addEventListener("keydown", (event) => {
+    if (event.key === "Tab") {
+      if (event.shiftKey) { 
+        // Si Shift + Tab et on est sur le premier élément -> Retourne au dernier
+        if (document.activeElement === firstElement) {
+          event.preventDefault();
+          lastElement.focus();
+        }
+      } else { 
+        // Si Tab et on est sur le dernier élément -> Retourne au premier
+        if (document.activeElement === lastElement) {
+          event.preventDefault();
+          firstElement.focus();
+        }
+      }
+    }
+  });
+  namePhotographerModal();
 }
+
+
 
 
 
@@ -52,6 +87,7 @@ form.addEventListener("submit", (event) => {
 function closeModal() {
   let modal = document.getElementById("contact_modal");
   modal.style.display = "none";
+  modal.setAttribute("aria-hidden", "true");
 }
 // Fermer la modale avec la touche Échap
 

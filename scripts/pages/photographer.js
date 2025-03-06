@@ -3,6 +3,8 @@
 /*global getLikesPhotographer */
 /*global  namePhotographerModal*/
 
+
+
 async function main() {
   const params = new URLSearchParams(window.location.search);
   const idFromUrl = parseInt(params.get("id")); // Convertir en nombre
@@ -14,7 +16,7 @@ async function main() {
   const totalLikes = await getLikesPhotographer(idFromUrl);
 
   displayPhotographerInfo(photographer, totalLikes);
-  displayMedia(media, totalLikes); // Passer totalLikes à displayMedia
+  displayMedia(media);
 
   displayDropdown();
 
@@ -25,18 +27,16 @@ async function main() {
 
   const nameToDisplay = photographer.name;
   namePhotographerModal(nameToDisplay);
+  currentMedia = media;
 }
+
 let currentMedia = []; // Stocke les médias du photographe
 let currentIndex = 0; // Stocke l’index du média affiché dans la modale
 
 function displayPhotographerInfo(photographer, totalLikes) {
   document.getElementById("name-container").innerHTML = photographer.name;
-  document.getElementById(
-    "infos-container"
-  ).innerHTML = `${photographer.city}, ${photographer.country}`;
-  document.getElementById(
-    "photographer-portrait"
-  ).src = `./photos/samplephotos/photographersidphotos/${photographer.portrait}`;
+  document.getElementById("infos-container").innerHTML = `${photographer.city}, ${photographer.country}`;
+  document.getElementById("photographer-portrait").src = `./photos/samplephotos/photographersidphotos/${photographer.portrait}`;
   document.getElementById("tagline-container").innerHTML = photographer.tagline;
 
   // ajout des class css
@@ -65,73 +65,115 @@ function displayPhotographerInfo(photographer, totalLikes) {
   priceElement.textContent = `${photographer.price} €/jour`;
 }
 
-function createMediaElement(mediaItem, index) {
-  const mediaElement = document.createElement("article");
-  
-  if (mediaItem.image) {
-    appendImage(mediaElement, mediaItem, index);
-  } else if (mediaItem.video) {
-    appendVideo(mediaElement, mediaItem, index);
+// ========================= FACTORY PATTERN =========================
+
+// Interface Media
+class MediaItem {
+  constructor(mediaItem) {
+      this.mediaItem = mediaItem;
   }
-  
-  const divLikeContainer = createLikeContainer(mediaItem);
-  mediaElement.appendChild(divLikeContainer);
-  
-  return mediaElement;
+
+  createLikeContainer() {
+      const divLikeContainer = document.createElement("div");
+      divLikeContainer.classList.add("container-likes");
+      
+      const titleParagraph = document.createElement("p");
+      titleParagraph.textContent = this.mediaItem.title;
+      divLikeContainer.appendChild(titleParagraph);
+      
+      const likesParagraph = document.createElement("p");
+      likesParagraph.textContent = this.mediaItem.likes;
+      divLikeContainer.appendChild(likesParagraph);
+      
+      const heartLikes = createHeartButton();
+      divLikeContainer.appendChild(heartLikes);
+      
+      const likesStyle = createLikesStyle(likesParagraph, heartLikes);
+      divLikeContainer.appendChild(likesStyle);
+      
+      addLikeEventListener(heartLikes, this.mediaItem, likesParagraph);
+      
+      return divLikeContainer;
+  }
 }
 
-function appendImage(mediaElement, mediaItem, index) {
-  const imageElement = document.createElement("img");
-  imageElement.tabIndex = 0;
-  const photographerFolder = mediaItem.photographerId;
-  imageElement.src = `./photos/imagesetvideos/${photographerFolder}/${mediaItem.image}`;
-  
-  addModalOpenListeners(imageElement, index);
-  
-  mediaElement.appendChild(imageElement);
+// Classe concrète pour les images
+class ImageMediaItem extends MediaItem {
+  createMediaElement(index) {
+      const article = document.createElement('article');
+      const img = document.createElement('img');
+      img.src = `./photos/imagesetvideos/${this.mediaItem.photographerId}/${this.mediaItem.image}`;
+      img.alt = this.mediaItem.title;
+      img.tabIndex = 0;
+
+      img.addEventListener('click', () => openModal(index));
+      img.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter') {
+              openModal(index);
+          }
+      });
+
+      const divLikeContainer = this.createLikeContainer();
+
+      article.appendChild(img);
+      article.appendChild(divLikeContainer);
+
+      return article;
+  }
 }
 
-function appendVideo(mediaElement, mediaItem, index) {
-  const videoElement = document.createElement("video");
-  const photographerFolder = mediaItem.photographerId;
-  videoElement.src = `./photos/imagesetvideos/${photographerFolder}/${mediaItem.video}`;
-  videoElement.tabIndex = 0;
-  
-  addModalOpenListeners(videoElement, index);
-  
-  mediaElement.appendChild(videoElement);
+// Classe concrète pour les vidéos
+class VideoMediaItem extends MediaItem {
+  createMediaElement(index) {
+      const article = document.createElement('article');
+      const video = document.createElement('video');
+      video.src = `./photos/imagesetvideos/${this.mediaItem.photographerId}/${this.mediaItem.video}`;
+      video.alt = this.mediaItem.title;
+      video.tabIndex = 0;
+
+      video.addEventListener('click', () => openModal(index));
+      video.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter') {
+              openModal(index);
+          }
+      });
+
+      const divLikeContainer = this.createLikeContainer();
+
+      article.appendChild(video);
+      article.appendChild(divLikeContainer);
+
+      return article;
+  }
 }
 
-function addModalOpenListeners(element, index) {
-  element.addEventListener("click", () => openModal(index));
-  element.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") {
-      openModal(index);
-    }
-  });
+// Factory
+class MediaFactory {
+  create(mediaItem) {
+      if (mediaItem.image) {
+          return new ImageMediaItem(mediaItem);
+      } else if (mediaItem.video) {
+          return new VideoMediaItem(mediaItem);
+      } else {
+          return null;
+      }
+  }
 }
 
-function createLikeContainer(mediaItem) {
-  const divLikeContainer = document.createElement("div");
-  divLikeContainer.classList.add("container-likes");
-  
-  const titleParagraph = document.createElement("p");
-  titleParagraph.textContent = mediaItem.title;
-  divLikeContainer.appendChild(titleParagraph);
-  
-  const likesParagraph = document.createElement("p");
-  likesParagraph.textContent = mediaItem.likes;
-  divLikeContainer.appendChild(likesParagraph);
-  
-  const heartLikes = createHeartButton();
-  divLikeContainer.appendChild(heartLikes);
-  
-  const likesStyle = createLikesStyle(likesParagraph, heartLikes);
-  divLikeContainer.appendChild(likesStyle);
-  
-  addLikeEventListener(heartLikes, mediaItem, likesParagraph);
-  
-  return divLikeContainer;
+// ========================= FIN FACTORY PATTERN =========================
+
+// Fonction pour afficher les médias
+function displayMedia(media) {
+    const mediaContainer = document.getElementById("media-container");
+    mediaContainer.innerHTML = "";
+
+    const mediaFactory = new MediaFactory();
+
+    media.forEach((mediaItem, index) => {
+        const mediaObj = mediaFactory.create(mediaItem);
+        const mediaElement = mediaObj.createMediaElement(index);
+        mediaContainer.appendChild(mediaElement);
+    });
 }
 
 function createHeartButton() {
@@ -175,71 +217,42 @@ function addLikeEventListener(heartLikes, mediaItem, likesParagraph) {
   });
 }
 
-function displayMedia(media) {
-  currentMedia = media;
-  const mediaContainer = document.getElementById("media-container");
-  mediaContainer.innerHTML = "";
-  
-  media.forEach((mediaItem, index) => {
-    const mediaElement = createMediaElement(mediaItem, index);
-    mediaContainer.appendChild(mediaElement);
-  });
-}
-
 function createDropdown() {
   const options = ["Popularité", "Date", "Titre"];
 
-  function createDropdownButton() {
-    const dropdownButton = document.createElement("div");
-    dropdownButton.classList.add("title-dropdown");
+  const dropdownButton = document.createElement("div");
+  dropdownButton.classList.add("title-dropdown");
 
-    const titledropdown = document.createElement("span");
-    titledropdown.textContent = options[0];
-    titledropdown.classList.add("dropdown-title");
-    titledropdown.style.borderBottom = "none";
+  const titledropdown = document.createElement("span");
+  titledropdown.textContent = options[0];
+  titledropdown.classList.add("dropdown-title");
+  titledropdown.style.borderBottom = "none";
 
-    const fleche = document.createElement("button");
-    fleche.classList.add("fa-solid", "fa-angle-up");
-    fleche.setAttribute("aria-haspopup", "listbox");
-    fleche.setAttribute("aria-expanded", "false");
-    fleche.setAttribute("aria-labelledby", "dropdown-label");
+  const fleche = document.createElement("button");
+  fleche.classList.add("fa-solid", "fa-angle-up");
+  fleche.setAttribute("aria-haspopup", "listbox");
+  fleche.setAttribute("aria-expanded", "false");
+  fleche.setAttribute("aria-labelledby", "dropdown-label");
 
-    dropdownButton.appendChild(titledropdown);
-    dropdownButton.appendChild(fleche);
+  dropdownButton.appendChild(titledropdown);
+  dropdownButton.appendChild(fleche);
 
-    return { dropdownButton, titledropdown, fleche };
-  }
+  const dropdownOptions = document.createElement("div");
+  dropdownOptions.classList.add("dropdown-options", "close");
+  dropdownOptions.setAttribute("role", "listbox");
+  dropdownOptions.setAttribute("aria-labelledby", "dropdown-label");
 
-  function createDropdownOptions() {
-    const dropdownOptions = document.createElement("div");
-    dropdownOptions.classList.add("dropdown-options", "close");
-    dropdownOptions.setAttribute("role", "listbox");
-    dropdownOptions.setAttribute("aria-labelledby", "dropdown-label");
+  const optionElements = options.slice(1).map(optionText => {
+    const option = document.createElement("button");
+    option.textContent = optionText;
+    option.classList.add("option-title");
+    option.setAttribute("role", "option");
+    option.tabIndex = 0;
+    dropdownOptions.appendChild(option);
+    return option;
+  });
 
-    const optionElements = options.slice(1).map(optionText => {
-      const option = document.createElement("button");
-      option.textContent = optionText;
-      option.classList.add("option-title");
-      option.setAttribute("role", "option");
-      option.tabIndex = 0;
-      return option;
-    });
-
-    optionElements.forEach(option => dropdownOptions.appendChild(option));
-
-    return { dropdownOptions, optionElements };
-  }
-
-  const { dropdownButton, titledropdown, fleche } = createDropdownButton();
-  const { dropdownOptions, optionElements } = createDropdownOptions();
-
-  return {
-    dropdownButton,
-    titledropdown,
-    fleche,
-    dropdownOptions,
-    optionElements
-  };
+  return { dropdownButton, dropdownOptions, fleche, titledropdown, optionElements };
 }
 
 function setupDropdownEvents(elements) {
@@ -314,7 +327,7 @@ function handleSorting(media) {
       }
 
       displayMedia(sortedMedia);
-    });
+    });                       
   });
 }
 
@@ -366,36 +379,63 @@ function createVideoElement() {
 
 // ouverture de la modale a image
 
+
 function openModal(index) {
   currentIndex = index; // Met à jour l’index de l’image actuelle
   modal.classList.add("modal-overlay");
   modal.style.display = "flex";
-
+  modal.setAttribute("aria-modal", "true"); // Rend la modale accessible
+  modal.setAttribute("role", "dialog");
+  modal.setAttribute("aria-labelledby", "modal-title");
   updateModal(); // Charge l'image ou la vidéo AVANT d'ajouter les attributs
-
-  // Récupère les éléments après l'affichage
+  // Récupère tous les éléments de la modale après l'affichage
   const modalImage = document.getElementById("modal-image");
   const modalVideo = document.getElementById("modal-video");
-
-  // Vérifie si les éléments existent avant d'appliquer setAttribute
-  if (modalImage) {
-    modalImage.setAttribute("tabindex", "0");
-    modalImage.focus();
-  }
-
-  if (modalVideo) {
-    modalVideo.setAttribute("tabindex", "0");
-    modalVideo.focus();
-  }
-
+  const modalTitle = document.getElementById("modal-title");
+  const closeModalBtn = document.querySelector(".close-modal");
+  const leftArrow = document.querySelector(".left-arrow");
+  const rightArrow = document.querySelector(".right-arrow");
+  // Sélectionner tous les éléments focusables
+  const focusableElements = modal.querySelectorAll(
+    "h2, img, video, button, .left-arrow, .right-arrow,.close-modal, [tabindex]:not([tabindex='-1'])"
+  );
+  
+  const firstElement = focusableElements[0]; // Premier élément focusable
+  const lastElement = focusableElements[focusableElements.length - 1]; // Dernier élément focusable
+  // Vérifie si les éléments existent et applique tabindex + focus
+  if (modalImage) modalImage.setAttribute("tabindex", "0");
+  if (modalVideo) modalVideo.setAttribute("tabindex", "0");
+  if (modalTitle) modalTitle.setAttribute("tabindex", "0");
   closeModalBtn.setAttribute("tabindex", "0");
-
-  // accessibilité clavier avec fleches
-
   leftArrow.setAttribute("tabindex", "0");
   rightArrow.setAttribute("tabindex", "0");
+  // Place le focus sur le premier élément (image/vidéo ou titre si absent)
+  if (modalImage) {
+    modalImage.focus();
+  } else if (modalVideo) {
+    modalVideo.focus();
+  } else {
+    modalTitle.focus();
+  }
+  // Gestion du piège de focus
+  modal.addEventListener("keydown", (event) => {
+    if (event.key === "Tab") {
+      if (event.shiftKey) {
+        // Si Shift + Tab et on est sur le premier élément -> Retour au dernier
+        if (document.activeElement === firstElement) {
+          event.preventDefault();
+          lastElement.focus();
+        }
+      } else {
+        // Si Tab et on est sur le dernier élément -> Retour au premier
+        if (document.activeElement === lastElement) {
+          event.preventDefault();
+          firstElement.focus();
+        }
+      }
+    }
+  });
 }
-
 function displayPreviousMedia() {
   currentIndex = (currentIndex - 1 + currentMedia.length) % currentMedia.length;
   updateModal();
