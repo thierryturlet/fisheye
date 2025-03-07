@@ -360,7 +360,7 @@ function createImageElement() {
 
   const modalImage = document.createElement("img");
   modalImage.id = "modal-image";
-  modalImage.alt = "Apercu de l'ímage";
+  modalImage.alt = "title";
 
   modalMedia.appendChild(modalImage);
 }
@@ -371,7 +371,7 @@ function createVideoElement() {
 
   const modalVideo = document.createElement("video");
   modalVideo.id = "modal-video";
-  modalVideo.alt = "Apercu de la video";
+  modalVideo.alt ="title";
   modalVideo.controls = true;
 
   modalMedia.appendChild(modalVideo);
@@ -505,6 +505,7 @@ function loadImageInModal(imageSrc, titleParagraph) {
   getPreviousMediaTitle();
   const modalImage = document.getElementById("modal-image");
   modalImage.src = imageSrc; // Change la source de l'image
+  modalImage.alt = titleParagraph;
   modalTitle.textContent = titleParagraph; // Ajoute le titre sous l'image
   modalTitle.className = titleParagraph.className;
   modalTitle.setAttribute("tabindex", "-1");
