@@ -44,7 +44,7 @@ function displayModal() {
 
 
 
-
+8
 
 //Ajout du nom du photographe
 

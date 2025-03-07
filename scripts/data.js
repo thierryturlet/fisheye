@@ -1,7 +1,4 @@
-/* eslint-disable no-unused-vars */
-
-
-
+// eslint-disable-next-line no-unused-vars 
 async function getPhotographers() {
   const response = await fetch("./data/photographers.json");
 
@@ -9,7 +6,7 @@ async function getPhotographers() {
 
   return data.photographers;
 }
-
+// eslint-disable-next-line no-unused-vars 
 async function getPhotographerById(id) {
   const response = await fetch("./data/photographers.json");
 
@@ -27,6 +24,7 @@ async function getPhotographerById(id) {
   return photographerToFind;
 }
 
+// eslint-disable-next-line no-unused-vars 
 async function getMediaPhotographer(id) {
   const response = await fetch("./data/photographers.json");
 
@@ -40,7 +38,7 @@ async function getMediaPhotographer(id) {
 
   return mediaToFind;
 }
-
+// eslint-disable-next-line no-unused-vars 
 async function getLikesPhotographer(id) {
   const response = await fetch("./data/photographers.json");
   const data = await response.json();

@@ -2,7 +2,7 @@
 /*global getMediaPhotographer */
 /*global getLikesPhotographer */
 /*global  namePhotographerModal*/
-
+/*global MediaFactory */
 
 
 async function main() {
@@ -65,108 +65,14 @@ function displayPhotographerInfo(photographer, totalLikes) {
   priceElement.textContent = `${photographer.price} €/jour`;
 }
 
-// ========================= FACTORY PATTERN =========================
-
-// Interface Media
-class MediaItem {
-  constructor(mediaItem) {
-      this.mediaItem = mediaItem;
-  }
-
-  createLikeContainer() {
-      const divLikeContainer = document.createElement("div");
-      divLikeContainer.classList.add("container-likes");
-      
-      const titleParagraph = document.createElement("p");
-      titleParagraph.textContent = this.mediaItem.title;
-      divLikeContainer.appendChild(titleParagraph);
-      
-      const likesParagraph = document.createElement("p");
-      likesParagraph.textContent = this.mediaItem.likes;
-      divLikeContainer.appendChild(likesParagraph);
-      
-      const heartLikes = createHeartButton();
-      divLikeContainer.appendChild(heartLikes);
-      
-      const likesStyle = createLikesStyle(likesParagraph, heartLikes);
-      divLikeContainer.appendChild(likesStyle);
-      
-      addLikeEventListener(heartLikes, this.mediaItem, likesParagraph);
-      
-      return divLikeContainer;
-  }
-}
-
-// Classe concrète pour les images
-class ImageMediaItem extends MediaItem {
-  createMediaElement(index) {
-      const article = document.createElement('article');
-      const img = document.createElement('img');
-      img.src = `./photos/imagesetvideos/${this.mediaItem.photographerId}/${this.mediaItem.image}`;
-      img.alt = this.mediaItem.title;
-      img.tabIndex = 0;
-
-      img.addEventListener('click', () => openModal(index));
-      img.addEventListener('keydown', (event) => {
-          if (event.key === 'Enter') {
-              openModal(index);
-          }
-      });
-
-      const divLikeContainer = this.createLikeContainer();
-
-      article.appendChild(img);
-      article.appendChild(divLikeContainer);
-
-      return article;
-  }
-}
-
-// Classe concrète pour les vidéos
-class VideoMediaItem extends MediaItem {
-  createMediaElement(index) {
-      const article = document.createElement('article');
-      const video = document.createElement('video');
-      video.src = `./photos/imagesetvideos/${this.mediaItem.photographerId}/${this.mediaItem.video}`;
-      video.alt = this.mediaItem.title;
-      video.tabIndex = 0;
-
-      video.addEventListener('click', () => openModal(index));
-      video.addEventListener('keydown', (event) => {
-          if (event.key === 'Enter') {
-              openModal(index);
-          }
-      });
-
-      const divLikeContainer = this.createLikeContainer();
-
-      article.appendChild(video);
-      article.appendChild(divLikeContainer);
-
-      return article;
-  }
-}
-
-// Factory
-class MediaFactory {
-  create(mediaItem) {
-      if (mediaItem.image) {
-          return new ImageMediaItem(mediaItem);
-      } else if (mediaItem.video) {
-          return new VideoMediaItem(mediaItem);
-      } else {
-          return null;
-      }
-  }
-}
-
-// ========================= FIN FACTORY PATTERN =========================
 
 // Fonction pour afficher les médias
+
 function displayMedia(media) {
     const mediaContainer = document.getElementById("media-container");
     mediaContainer.innerHTML = "";
 
+    
     const mediaFactory = new MediaFactory();
 
     media.forEach((mediaItem, index) => {
@@ -175,7 +81,7 @@ function displayMedia(media) {
         mediaContainer.appendChild(mediaElement);
     });
 }
-
+// eslint-disable-next-line no-unused-vars 
 function createHeartButton() {
   const heartLikes = document.createElement("button");
   heartLikes.classList.add("fa-solid", "fa-heart", "heart-icon");
@@ -190,7 +96,7 @@ function createHeartButton() {
   heartLikes.appendChild(heartLikesLabel);
   return heartLikes;
 }
-
+// eslint-disable-next-line no-unused-vars 
 function createLikesStyle(likesParagraph, heartLikes) {
   const likesStyle = document.createElement("div");
   likesStyle.appendChild(likesParagraph);
@@ -198,7 +104,7 @@ function createLikesStyle(likesParagraph, heartLikes) {
   likesStyle.classList.add("stylediv");
   return likesStyle;
 }
-
+// eslint-disable-next-line no-unused-vars 
 function addLikeEventListener(heartLikes, mediaItem, likesParagraph) {
   mediaItem.isLiked = false;
   heartLikes.addEventListener("click", () => {
@@ -379,7 +285,7 @@ function createVideoElement() {
 
 // ouverture de la modale a image
 
-
+// eslint-disable-next-line no-unused-vars 
 function openModal(index) {
   currentIndex = index; // Met à jour l’index de l’image actuelle
   modal.classList.add("modal-overlay");
