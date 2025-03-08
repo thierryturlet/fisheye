@@ -240,15 +240,15 @@ function handleSorting(media) {
 // trie en fonction des dates nbr de likes et ordre alphabetique
 
 function sortMediaByPopularity(media) {
-  return [...media].sort((a, b) => b.likes - a.likes);
+  return media.sort((a, b) => b.likes - a.likes);
 }
 
 function sortMediaByDate(media) {
-  return [...media].sort((a, b) => new Date(b.date) - new Date(a.date));
+  return media.sort((a, b) => new Date(b.date) - new Date(a.date));
 }
 
 function sortMediaByTitle(media) {
-  return [...media].sort((a, b) => a.title.localeCompare(b.title));
+  return media.sort((a, b) => a.title.localeCompare(b.title));
 }
 
 // Elements liés a la modal d'ímages
